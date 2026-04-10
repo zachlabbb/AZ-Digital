@@ -424,6 +424,9 @@
       grid-template-columns: 1fr 1fr;
       gap: .5rem;
     }
+    .hf-service-row {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
     .hf-toggle {
       background: rgba(255,255,255,.04);
       border: 1px solid rgba(255,255,255,.1);
@@ -2338,6 +2341,22 @@
             </div>
 
             <div class="hf-group">
+              <label>Quel service vous intéresse ?</label>
+              <div class="hf-toggle-row hf-service-row">
+                <button type="button" class="hf-toggle hf-service-btn" data-service="Création de site" id="hf-svc-creation">
+                  Nouveau site
+                </button>
+                <button type="button" class="hf-toggle hf-service-btn" data-service="Optimisation de site" id="hf-svc-optim">
+                  Optimisation
+                </button>
+                <button type="button" class="hf-toggle hf-service-btn" data-service="E-commerce" id="hf-svc-ecom">
+                  E-commerce
+                </button>
+              </div>
+              <input type="hidden" id="hf-service" name="service" value="" />
+            </div>
+
+            <div class="hf-group">
               <label>Avez-vous déjà un site web ?</label>
               <div class="hf-toggle-row">
                 <button type="button" class="hf-toggle active" data-val="non" id="hf-toggle-non">
@@ -2474,7 +2493,7 @@
         <span class="card-period">/projet</span>
       </div>
       <p class="card-desc">Vous n'avez pas encore de présence en ligne. On conçoit votre site from scratch — design, structure et contenu, à votre image.</p>
-      <button class="card-btn card-btn-outline" onclick="document.getElementById('hf-name').scrollIntoView({behavior:'smooth',block:'center'})">Démarrer</button>
+      <button class="card-btn card-btn-outline" onclick="selectPlan('Création de site')">Démarrer</button>
       <div class="card-features-title">Ce qui est inclus :</div>
       <ul class="card-features">
         <li>Design sur mesure</li>
@@ -2494,7 +2513,7 @@
         <span class="card-period">/projet</span>
       </div>
       <p class="card-desc">Votre site existe déjà mais il est lent, peu visible ou ne convertit pas. On l'améliore en profondeur pour de vrais résultats.</p>
-      <button class="card-btn card-btn-default" onclick="document.getElementById('hf-name').scrollIntoView({behavior:'smooth',block:'center'})">Démarrer</button>
+      <button class="card-btn card-btn-default" onclick="selectPlan('Optimisation de site')">Démarrer</button>
       <div class="card-features-title">Ce qui est inclus :</div>
       <ul class="card-features">
         <li>Audit complet de votre site</li>
@@ -2514,7 +2533,7 @@
         <span class="card-period">/projet</span>
       </div>
       <p class="card-desc">Vendez vos produits 24h/24. On construit votre boutique Shopify ou WooCommerce, optimisée pour convertir et générer des ventes.</p>
-      <button class="card-btn card-btn-outline" onclick="document.getElementById('hf-name').scrollIntoView({behavior:'smooth',block:'center'})">Démarrer</button>
+      <button class="card-btn card-btn-outline" onclick="selectPlan('E-commerce')">Démarrer</button>
       <div class="card-features-title">Tout dans Optimisation, plus :</div>
       <ul class="card-features">
         <li>Boutique Shopify ou WooCommerce</li>
@@ -3463,6 +3482,35 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   document.querySelectorAll('.section-sparkles').forEach(initSparkles);
 })();
 
+
+/* ── Sélection du plan depuis les cartes pricing ── */
+function selectPlan(service) {
+  // Pré-sélectionner le service dans le formulaire
+  document.querySelectorAll('.hf-service-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.service === service);
+  });
+  document.getElementById('hf-service').value = service;
+
+  // Auto-remplir le toggle "avez-vous un site"
+  if (service === 'Optimisation de site') {
+    document.getElementById('hf-toggle-oui').click();
+  } else {
+    document.getElementById('hf-toggle-non').click();
+  }
+
+  // Scroll vers le formulaire
+  document.getElementById('hf-name').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => document.getElementById('hf-name').focus(), 600);
+}
+
+/* ── Clics sur les boutons de service ── */
+document.querySelectorAll('.hf-service-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.hf-service-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('hf-service').value = btn.dataset.service;
+  });
+});
 
 /* ── Hero toggle: site web oui/non ── */
 const toggleNon = document.getElementById('hf-toggle-non');
