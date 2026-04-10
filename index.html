@@ -1841,81 +1841,105 @@
 
     /* ── Founders strip ── */
     .founders-strip {
-      background: var(--bg2);
+      background: #000;
+      border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 2.8rem 3rem;
+      padding: 4rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .founders-strip::after {
+      content: '';
+      position: absolute;
+      left: 20%; right: 20%;
+      top: 0; height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(0,128,255,.08) 0%, transparent 70%);
+      pointer-events: none;
     }
     .founders-inner {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
       display: flex;
       align-items: center;
-      gap: 3rem;
+      justify-content: center;
+      gap: 4rem;
       flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .founders-left {
+      text-align: left;
     }
     .founders-label {
-      font-size: .68rem;
-      letter-spacing: .2em;
+      font-size: .65rem;
+      letter-spacing: .25em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.25);
-      flex-shrink: 0;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: .6rem;
+      display: block;
     }
+    .founders-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.2;
+      margin-bottom: .8rem;
+    }
+    .founders-tagline {
+      font-size: .85rem;
+      color: rgba(255,255,255,.4);
+      line-height: 1.6;
+      max-width: 340px;
+    }
+    .founders-tagline strong { color: var(--white); }
     .founders-profiles {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1rem;
       flex-wrap: wrap;
     }
     .founder-chip {
       display: flex;
       align-items: center;
-      gap: .9rem;
-      background: rgba(255,255,255,.04);
+      gap: 1rem;
+      background: rgba(255,255,255,.03);
       border: 1px solid var(--border);
-      border-radius: 50px;
-      padding: .5rem 1.2rem .5rem .5rem;
-      transition: border-color .3s, background .3s;
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      transition: border-color .3s, background .3s, transform .3s var(--ease);
     }
     .founder-chip:hover {
-      border-color: rgba(4,227,255,.3);
+      border-color: rgba(4,227,255,.35);
       background: rgba(4,227,255,.05);
+      transform: translateY(-3px);
     }
     .founder-chip-avatar {
-      width: 40px; height: 40px;
+      width: 52px; height: 52px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 1rem;
+      font-size: 1.2rem;
       flex-shrink: 0;
+      box-shadow: 0 0 0 1px rgba(4,227,255,.2), 0 0 16px rgba(4,227,255,.1);
     }
     .founder-chip-name {
-      font-size: .9rem;
+      font-size: .95rem;
       font-weight: 700;
-      line-height: 1.1;
+      line-height: 1.2;
     }
     .founder-chip-role {
-      font-size: .68rem;
+      font-size: .7rem;
       color: rgba(255,255,255,.35);
+      margin-top: .15rem;
     }
-    .founders-divider {
-      width: 1px;
-      height: 40px;
-      background: var(--border);
-      flex-shrink: 0;
-    }
-    .founders-tagline {
-      font-size: .85rem;
-      color: rgba(255,255,255,.4);
-      line-height: 1.5;
-      max-width: 320px;
-    }
-    .founders-tagline strong { color: var(--white); }
+    .founders-divider { display: none; }
     @media (max-width: 768px) {
-      .founders-strip { padding: 2rem 1.5rem; }
-      .founders-inner { gap: 1.5rem; }
-      .founders-divider { display: none; }
+      .founders-strip { padding: 3rem 1.5rem; }
+      .founders-inner { gap: 2.5rem; flex-direction: column; align-items: flex-start; }
+      .founders-left { text-align: left; }
     }
 
     /* ── Glow lines ── */
@@ -2351,8 +2375,13 @@
 
 <!-- Founders strip -->
 <div class="founders-strip">
+  <canvas class="section-sparkles"></canvas>
   <div class="founders-inner">
-    <span class="founders-label">Fondé par</span>
+    <div class="founders-left">
+      <span class="founders-label">Fondé par</span>
+      <h3 class="founders-title">Deux devs.<br>Un seul objectif.</h3>
+      <p class="founders-tagline"><strong>Pas d'intermédiaire.</strong> Zachary et Alseny conçoivent votre site eux-mêmes — du code au lancement.</p>
+    </div>
     <div class="founders-profiles">
       <div class="founder-chip">
         <div class="founder-chip-avatar" style="background:linear-gradient(135deg,#0040a0,#04E3FF);color:#000d1a;">Z</div>
@@ -2369,8 +2398,6 @@
         </div>
       </div>
     </div>
-    <div class="founders-divider"></div>
-    <p class="founders-tagline"><strong>Deux entrepreneurs québécois</strong> qui construisent votre site eux-mêmes. Pas d'intermédiaire, pas de sous-traitant — vous parlez toujours aux personnes qui codent.</p>
   </div>
 </div>
 
