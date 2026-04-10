@@ -1185,6 +1185,65 @@
       .testimonials-bento { grid-template-columns: 1fr; }
     }
 
+    /* ── FAQ ── */
+    #faq { background: #000; }
+    .faq-grid {
+      max-width: 760px;
+      margin: 4rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+    .faq-item.open { border-color: rgba(4,227,255,.4); }
+    .faq-question {
+      width: 100%;
+      background: var(--bg2);
+      border: none;
+      color: var(--white);
+      font-family: var(--font);
+      font-size: .97rem;
+      font-weight: 600;
+      text-align: left;
+      padding: 1.25rem 1.5rem;
+      cursor: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: background .2s;
+    }
+    .faq-question:hover { background: #0e0e0e; }
+    .faq-icon {
+      width: 22px; height: 22px;
+      border: 1px solid rgba(4,227,255,.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent);
+      font-size: 1.1rem;
+      transition: transform .3s var(--ease), background .2s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(4,227,255,.1); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s var(--ease), padding .3s;
+      background: var(--bg2);
+    }
+    .faq-answer-inner {
+      padding: 0 1.5rem 1.25rem;
+      font-size: .9rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,.6);
+    }
+    .faq-item.open .faq-answer { max-height: 300px; }
+
     /* ── Contact ── */
     #contact {
       background: var(--bg2);
@@ -2313,6 +2372,7 @@
     <li><a href="#process">Processus</a></li>
     <li><a href="#about">L'équipe</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact" class="nav-cta">Soumission gratuite</a></li>
   </ul>
   <button class="nav-burger" id="nav-burger" aria-label="Menu">
@@ -3181,6 +3241,77 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <p class="section-label anim-js">FAQ</p>
+    <h2 class="section-title anim-js delay-1">Questions fréquentes</h2>
+    <div class="faq-grid">
+
+      <div class="faq-item anim-js delay-1">
+        <button class="faq-question">
+          Combien de temps pour livrer mon site ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">En moyenne, un site vitrine est livré en <strong style="color:#fff;">7 à 14 jours</strong> après notre première rencontre. Un projet e-commerce peut prendre 3 à 4 semaines selon la complexité. On vous donne une date précise dès le départ — et on la tient.</div>
+        </div>
+      </div>
+
+      <div class="faq-item anim-js delay-2">
+        <button class="faq-question">
+          Est-ce que je peux demander des modifications ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Oui. Chaque projet inclut <strong style="color:#fff;">2 rondes de révisions</strong> sans frais supplémentaires. On travaille avec vous jusqu'à ce que vous soyez 100% satisfait du résultat avant le lancement.</div>
+        </div>
+      </div>
+
+      <div class="faq-item anim-js delay-3">
+        <button class="faq-question">
+          L'hébergement et le domaine sont-ils inclus ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">L'hébergement et le nom de domaine ne sont pas inclus dans le forfait, mais on s'occupe de tout configurer pour vous. On recommande des solutions fiables et abordables — généralement <strong style="color:#fff;">moins de 20$/mois</strong> pour héberger votre site.</div>
+        </div>
+      </div>
+
+      <div class="faq-item anim-js delay-1">
+        <button class="faq-question">
+          Je ne suis pas techno — est-ce que je vais pouvoir gérer mon site ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Absolument. On livre tous nos sites avec une <strong style="color:#fff;">interface simple à utiliser</strong>, et on vous forme en 30 minutes pour que vous puissiez modifier vos textes, photos et prix vous-même — sans toucher une ligne de code.</div>
+        </div>
+      </div>
+
+      <div class="faq-item anim-js delay-2">
+        <button class="faq-question">
+          Pourquoi choisir AZ Digital plutôt qu'une grande agence ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Avec une grande agence, vous parlez à un gestionnaire qui parle à un designer qui parle à un dev. Chez nous, <strong style="color:#fff;">Alseny et Zachary s'occupent de votre projet du début à la fin</strong> — communication directe, délais respectés, et un résultat qui reflète vraiment votre identité.</div>
+        </div>
+      </div>
+
+      <div class="faq-item anim-js delay-3">
+        <button class="faq-question">
+          Est-ce que vous offrez du support après le lancement ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Oui. Chaque forfait inclut une période de support (1, 3 ou 6 mois selon le plan). Après ça, on offre des forfaits de maintenance mensuelle pour que votre site reste rapide, sécurisé et à jour.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- Contact -->
 <section id="contact">
   <canvas class="section-sparkles"></canvas>
@@ -3433,6 +3564,16 @@ navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => na
     requestAnimationFrame(draw);
   })();
 })();
+
+/* ── FAQ accordion ── */
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
 
 /* ── Scroll animations ── */
 const observer = new IntersectionObserver((entries) => {
