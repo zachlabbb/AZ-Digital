@@ -1708,151 +1708,167 @@
       to { transform: translateX(-50%); }
     }
 
-    /* ── Need picker ── */
+    /* ── Pricing section ── */
     #need-picker {
-      padding: 6rem 3rem;
-      background: var(--bg);
       position: relative;
+      padding: 7rem 2rem 6rem;
+      background: #000;
       overflow: hidden;
-    }
-    .picker-header {
       text-align: center;
-      margin-bottom: 3.5rem;
     }
-    .picker-header .section-title { margin-bottom: .8rem; }
-    .picker-header .section-desc { margin: 0 auto; text-align: center; }
-    .picker-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      max-width: 1100px;
-      margin: 0 auto 3rem;
+    #pricing-sparkles {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
     }
-    .picker-card {
-      position: relative;
-      background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 8px;
-      padding: 2rem 1.8rem;
-      cursor: none;
-      transition: border-color .25s, background .25s, transform .4s var(--ease);
-      overflow: hidden;
-      user-select: none;
-    }
-    .picker-card::after {
+    #need-picker::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(4,227,255,.07), transparent 60%);
-      opacity: 0;
-      transition: opacity .3s;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size: 70px 80px;
       pointer-events: none;
+      z-index: 0;
+      -webkit-mask-image: radial-gradient(50% 40% at 50% 0%, white, transparent);
+      mask-image: radial-gradient(50% 40% at 50% 0%, white, transparent);
     }
-    .picker-card:hover { border-color: rgba(4,227,255,.25); transform: translateY(-3px); }
-    .picker-card:hover::after { opacity: 1; }
-    .picker-card.selected {
-      border-color: var(--accent);
-      background: rgba(4,227,255,.07);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 50px rgba(4,227,255,.1), 0 0 0 1px rgba(4,227,255,.2);
-    }
-    .picker-card.selected::after { opacity: 1; }
-    .picker-check {
+    #need-picker::after {
+      content: '';
       position: absolute;
-      top: 1rem; right: 1rem;
-      width: 22px; height: 22px;
-      border: 1.5px solid rgba(255,255,255,.15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background .25s, border-color .25s;
-      font-size: .7rem;
-    }
-    .picker-card.selected .picker-check {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: var(--bg);
-    }
-    .picker-icon-wrap {
-      width: 48px; height: 48px;
-      border-radius: 10px;
-      background: rgba(4,227,255,.08);
-      border: 1px solid rgba(4,227,255,.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.2rem;
-      color: var(--accent);
-      transition: background .25s, transform .3s var(--ease);
-    }
-    .picker-card:hover .picker-icon-wrap,
-    .picker-card.selected .picker-icon-wrap {
-      background: rgba(4,227,255,.15);
-      transform: scale(1.08);
-    }
-    .picker-name {
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: -.02em;
-      margin-bottom: .4rem;
-    }
-    .picker-desc {
-      font-size: .8rem;
-      color: rgba(255,255,255,.4);
-      line-height: 1.55;
-    }
-    .picker-price {
-      display: inline-block;
-      margin-top: .9rem;
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      color: var(--accent);
-      opacity: .7;
-    }
-    .picker-action {
-      text-align: center;
-      min-height: 52px;
-    }
-    .picker-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      background: var(--accent);
-      color: var(--bg);
-      padding: .9rem 2.2rem;
-      font-size: .9rem;
-      font-weight: 800;
-      border-radius: 4px;
-      text-decoration: none;
-      letter-spacing: .03em;
-      transition: transform .3s var(--ease), box-shadow .3s, opacity .3s;
-      opacity: 0;
-      transform: translateY(10px);
+      left: 10%; right: 10%;
+      top: 0; height: 100%;
+      background: radial-gradient(circle at center, #206ce8 0%, transparent 70%);
+      opacity: 0.3;
+      mix-blend-mode: screen;
       pointer-events: none;
+      z-index: 0;
     }
-    .picker-cta.visible {
-      opacity: 1;
-      transform: none;
-      pointer-events: auto;
+    .pricing-header {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 3rem;
     }
-    .picker-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 40px rgba(4,227,255,.3);
+    .pricing-header .section-label { margin-bottom: .6rem; }
+    .pricing-header .section-title { margin-bottom: 1rem; }
+    .pricing-header .section-desc { max-width: 520px; margin: 0 auto 1.8rem; }
+    .pricing-toggle {
+      display: inline-flex;
+      background: #111;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50px;
+      padding: 4px;
+      position: relative;
     }
-    .picker-hint {
-      text-align: center;
-      font-size: .78rem;
-      color: rgba(255,255,255,.2);
-      margin-top: 1.2rem;
+    .toggle-btn {
+      position: relative;
+      z-index: 2;
+      padding: .5rem 1.8rem;
+      border-radius: 50px;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,.6);
+      font-family: var(--font);
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color .25s;
+    }
+    .toggle-btn.active { color: #fff; }
+    .toggle-pill {
+      position: absolute;
+      top: 4px; bottom: 4px;
+      border-radius: 50px;
+      background: linear-gradient(to bottom, #3b82f6, #2563eb);
+      border: 4px solid #2563eb;
+      box-shadow: 0 0 14px rgba(37,99,235,.55);
+      transition: left .3s cubic-bezier(0.34,1.56,0.64,1), width .3s cubic-bezier(0.34,1.56,0.64,1);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      max-width: 980px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .pricing-card {
+      background: linear-gradient(135deg, #111 0%, #1a1a1a 50%, #111 100%);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: left;
+      transition: transform .3s var(--ease), border-color .3s;
+    }
+    .pricing-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,.2); }
+    .pricing-card.popular {
+      border-color: rgba(37,99,235,.5);
+      box-shadow: 0 -13px 80px 0 rgba(9,0,255,.35), 0 0 0 1px rgba(37,99,235,.3);
+      z-index: 3;
+    }
+    .card-name { font-size: 1.9rem; font-weight: 600; color: #fff; margin-bottom: .9rem; }
+    .card-price-wrap { display: flex; align-items: baseline; gap: .2rem; margin-bottom: .5rem; }
+    .card-currency { font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .card-amount { font-size: 2.6rem; font-weight: 700; color: #fff; transition: opacity .2s; }
+    .card-period { font-size: .9rem; color: rgba(255,255,255,.5); margin-left: .2rem; }
+    .card-desc { font-size: .82rem; color: rgba(255,255,255,.5); line-height: 1.6; margin-bottom: 1.4rem; }
+    .card-btn {
+      width: 100%;
+      padding: .9rem 1.2rem;
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      margin-bottom: 1.4rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card-btn:hover { transform: translateY(-2px); }
+    .card-btn-default {
+      background: linear-gradient(to bottom, #3b82f6, #2563eb);
+      color: #fff;
+      border: 1px solid #3b82f6;
+      box-shadow: 0 4px 20px rgba(37,99,235,.4);
+    }
+    .card-btn-default:hover { box-shadow: 0 8px 30px rgba(37,99,235,.6); }
+    .card-btn-outline {
+      background: linear-gradient(to bottom, #2a2a2a, #111);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.15);
+      box-shadow: 0 4px 15px rgba(0,0,0,.4);
+    }
+    .card-btn-outline:hover { border-color: rgba(255,255,255,.3); }
+    .card-features-title {
+      font-size: .9rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: .9rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    .card-features { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .card-features li { display: flex; align-items: center; gap: .7rem; font-size: .83rem; color: rgba(255,255,255,.65); }
+    .card-features li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.3);
     }
     @media (max-width: 860px) {
-      .picker-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+      .pricing-card.popular { order: -1; }
     }
     @media (max-width: 520px) {
-      .picker-grid { grid-template-columns: 1fr; }
-      #need-picker { padding: 4rem 1.5rem; }
+      #need-picker { padding: 5rem 1.5rem 4rem; }
     }
 
     /* ── CTA band ── */
@@ -1882,6 +1898,128 @@
       font-size: 1.1rem;
       color: rgba(255,255,255,.5);
       margin-bottom: 3rem;
+    }
+    /* ── Scroll-Expansion Hero ── */
+    #hero-scroll-lock {
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    #hero-scroll-lock.expanded {
+      height: auto;
+      overflow: visible;
+    }
+    /* Override existing #hero display: flex so it starts hidden */
+    #hero {
+      display: none;
+    }
+    #hero.visible {
+      display: flex;
+    }
+    /* Stage: cinematic fixed overlay */
+    .sh-stage {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: #000;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sh-stage.done {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.45s ease;
+    }
+    .sh-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .sh-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .sh-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,8,20,0.3);
+    }
+    .sh-media {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.55);
+      z-index: 2;
+      transition: border-radius 0s;
+    }
+    .sh-media img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+    .sh-media-overlay {
+      position: absolute;
+      inset: 0;
+    }
+    .sh-title {
+      position: absolute;
+      z-index: 3;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .55rem;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .sh-word {
+      font-size: clamp(1.6rem, 4.2vw, 4.6rem);
+      font-weight: 900;
+      letter-spacing: -.04em;
+      color: rgba(184,234,255,0.95);
+      text-shadow: 0 4px 40px rgba(0,0,0,0.7);
+      white-space: nowrap;
+      line-height: 1.1;
+      will-change: transform;
+    }
+    .sh-word-accent { color: var(--accent); }
+    .sh-hint {
+      position: absolute;
+      bottom: 2.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .55rem;
+      font-size: .68rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+      animation: shHintFloat 2.4s ease-in-out infinite;
+    }
+    @keyframes shHintFloat {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+    /* Progress bar */
+    .sh-progress {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--accent2), var(--accent));
+      width: 0%;
+      z-index: 5;
+      transition: none;
+      box-shadow: 0 0 10px rgba(4,227,255,.5);
     }
   </style>
 </head>
@@ -1914,81 +2052,35 @@
   </button>
 </nav>
 
-<!-- Hero -->
-<section id="hero">
+<!-- Scroll-Expansion Hero -->
+<div id="hero-scroll-lock">
+
+  <!-- Stage: cinematic expansion screen -->
+  <div class="sh-stage" id="sh-stage">
+    <div class="sh-bg" id="sh-bg">
+      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1920&auto=format&fit=crop&q=80" alt="Ville la nuit">
+      <div class="sh-bg-overlay"></div>
+    </div>
+    <div class="sh-media" id="sh-media" style="width:300px;height:400px;border-radius:14px;">
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1280&auto=format&fit=crop&q=80" alt="AZ Digital — design web">
+      <div class="sh-media-overlay" id="sh-media-overlay" style="background:rgba(0,13,26,0.45);"></div>
+    </div>
+    <div class="sh-title">
+      <span class="sh-word" id="sh-word1">Votre site web,</span>
+      <span class="sh-word sh-word-accent" id="sh-word2">votre meilleur vendeur.</span>
+    </div>
+    <div class="sh-hint" id="sh-hint">
+      <span>Défiler pour découvrir</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
+      </svg>
+    </div>
+    <div class="sh-progress" id="sh-progress"></div>
+  </div>
+
+  <!-- Hero content revealed after expansion -->
+  <section id="hero">
   <canvas id="hero-canvas"></canvas>
-
-  <!-- 3D Browser Mockup -->
-  <div class="hero-mockup-wrap" id="hero-orb">
-    <div class="browser-mock">
-      <div class="b-bar">
-        <div class="b-dots"><span class="b-dot"></span><span class="b-dot"></span><span class="b-dot"></span></div>
-        <div class="b-url">monentreprise.ca</div>
-      </div>
-      <div class="b-screen">
-        <div class="ms-nav">
-          <div class="ms-logo">MonEntreprise</div>
-          <div class="ms-links"><div class="ms-link"></div><div class="ms-link"></div><div class="ms-link"></div><div class="ms-link"></div></div>
-        </div>
-        <div class="ms-hero">
-          <div class="ms-eyebrow"></div>
-          <div class="ms-h1"></div>
-          <div class="ms-h1b"></div>
-          <div class="ms-p"></div>
-          <div class="ms-p2"></div>
-          <div class="ms-btn"></div>
-        </div>
-        <div class="ms-img-row">
-          <div class="ms-img-card">
-            <img src="https://picsum.photos/seed/qc1/200/100" alt="" loading="lazy"/>
-            <div class="ms-img-body"><div class="ms-img-bar"></div><div class="ms-img-bar2"></div></div>
-          </div>
-          <div class="ms-img-card">
-            <img src="https://picsum.photos/seed/qc2/200/100" alt="" loading="lazy"/>
-            <div class="ms-img-body"><div class="ms-img-bar"></div><div class="ms-img-bar2"></div></div>
-          </div>
-          <div class="ms-img-card">
-            <img src="https://picsum.photos/seed/qc3/200/100" alt="" loading="lazy"/>
-            <div class="ms-img-body"><div class="ms-img-bar"></div><div class="ms-img-bar2"></div></div>
-          </div>
-        </div>
-        <div class="ms-stats">
-          <div class="ms-stat"><div class="ms-stat-n"></div><div class="ms-stat-l"></div></div>
-          <div class="ms-stat"><div class="ms-stat-n"></div><div class="ms-stat-l"></div></div>
-          <div class="ms-stat"><div class="ms-stat-n"></div><div class="ms-stat-l"></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CSS 3D Orb (removed, replaced by browser mockup above) -->
-  <div class="orb-wrap" id="hero-orb-old" style="display:none">
-    <div class="orb-atmosphere"></div>
-    <div class="orb-ring"></div>
-    <div class="orb-ring"></div>
-    <div class="orb-sphere">
-      <div class="orb-grid">
-        <svg viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
-              <path d="M 36 0 L 0 0 0 36" fill="none" stroke="rgba(4,227,255,1)" stroke-width=".6"/>
-            </pattern>
-            <radialGradient id="gridFade" cx="50%" cy="50%" r="50%">
-              <stop offset="30%" stop-color="white" stop-opacity="1"/>
-              <stop offset="100%" stop-color="white" stop-opacity="0"/>
-            </radialGradient>
-            <mask id="gridMask">
-              <rect width="100%" height="100%" fill="url(#gridFade)"/>
-            </mask>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" mask="url(#gridMask)"/>
-        </svg>
-      </div>
-      <div class="orb-glare"></div>
-      <div class="orb-pulse"></div>
-    </div>
-  </div>
-
   <div class="hero-blobs">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
@@ -2008,7 +2100,7 @@
         AZ Digital propulse les entrepreneurs locaux du Québec avec des sites web modernes, performants et qui convertissent les visiteurs en clients.
       </p>
       <div class="hero-actions">
-        <a href="#services" class="btn-secondary">Voir nos services</a>
+        <a href="#need-picker" class="btn-secondary">Voir nos forfaits</a>
         <a href="#portfolio" class="btn-secondary">Nos réalisations</a>
       </div>
     </div>
@@ -2123,7 +2215,9 @@
       </div><!-- /hero-form-card-outer -->
     </div>
   </div>
-</section>
+  </section>
+
+</div><!-- /hero-scroll-lock -->
 
 <!-- Marquee -->
 <div class="marquee-wrapper">
@@ -2170,104 +2264,87 @@
   </div>
 </div>
 
-<!-- Need picker -->
+<!-- Pricing section -->
 <section id="need-picker">
-  <div class="picker-header">
-    <p class="section-label anim-js">Par où commencer ?</p>
-    <h2 class="section-title anim-js delay-1">Quel est votre besoin ?</h2>
-    <p class="section-desc anim-js delay-2">Choisissez ce qui vous correspond le mieux — on s'occupe du reste.</p>
-    <div class="anim-js delay-3" style="display:inline-flex;align-items:center;gap:.6rem;margin-top:1.2rem;background:rgba(4,227,255,.07);border:1px solid rgba(4,227,255,.2);border-radius:20px;padding:.45rem 1.1rem;font-size:.78rem;font-weight:600;color:var(--accent);">
+  <canvas id="pricing-sparkles"></canvas>
+
+  <div class="pricing-header">
+    <p class="section-label anim-js">Nos forfaits</p>
+    <h2 class="section-title anim-js delay-1">Des prix clairs,<br>zéro surprise</h2>
+    <p class="section-desc anim-js delay-2">Choisissez le forfait qui correspond à votre projet — on s'occupe du reste.</p>
+    <div class="anim-js delay-3" style="display:inline-flex;align-items:center;gap:.6rem;margin-bottom:2rem;background:rgba(4,227,255,.07);border:1px solid rgba(4,227,255,.2);border-radius:20px;padding:.45rem 1.1rem;font-size:.78rem;font-weight:600;color:var(--accent);">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
       Les meilleurs prix du marché québécois — garanti
     </div>
+    <div class="anim-js delay-3">
+      <div class="pricing-toggle" id="pricing-toggle">
+        <div class="toggle-pill" id="toggle-pill"></div>
+        <button class="toggle-btn active" id="toggle-monthly" onclick="setPricing('monthly')">Mensuel</button>
+        <button class="toggle-btn" id="toggle-yearly" onclick="setPricing('yearly')">Annuel</button>
+      </div>
+    </div>
   </div>
 
-  <div class="picker-grid">
+  <div class="pricing-grid">
 
-    <div class="picker-card anim-js delay-1" data-service="Je n'ai pas de site — je veux en créer un">
-      <div class="picker-check">✓</div>
-      <div class="picker-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
-        </svg>
+    <div class="pricing-card anim-js delay-1">
+      <div class="card-name">Vitrine</div>
+      <div class="card-price-wrap">
+        <span class="card-currency">$</span>
+        <span class="card-amount" data-monthly="699" data-yearly="5 990">699</span>
+        <span class="card-period">/projet</span>
       </div>
-      <div class="picker-name">Créer mon premier site</div>
-      <div class="picker-desc">Vous n'avez pas encore de présence en ligne. On bâtit tout from scratch, à votre image.</div>
-      <span class="picker-price">À partir de 699 $</span>
+      <p class="card-desc">Vous n'avez pas encore de présence en ligne. On bâtit tout from scratch, à votre image.</p>
+      <button class="card-btn card-btn-outline" onclick="document.getElementById('hf-name').scrollIntoView({behavior:'smooth',block:'center'})">Démarrer</button>
+      <div class="card-features-title">Ce qui est inclus :</div>
+      <ul class="card-features">
+        <li>Design sur mesure</li>
+        <li>Jusqu'à 5 pages</li>
+        <li>Optimisation mobile</li>
+        <li>Formulaire de contact</li>
+        <li>1 mois de support inclus</li>
+      </ul>
     </div>
 
-    <div class="picker-card anim-js delay-2" data-service="Mon site est dépassé — je veux le refaire">
-      <div class="picker-check">✓</div>
-      <div class="picker-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
-        </svg>
+    <div class="pricing-card popular anim-js delay-2">
+      <div class="card-name">Refonte Pro</div>
+      <div class="card-price-wrap">
+        <span class="card-currency">$</span>
+        <span class="card-amount" data-monthly="499" data-yearly="3 990">499</span>
+        <span class="card-period">/projet</span>
       </div>
-      <div class="picker-name">Refaire mon site actuel</div>
-      <div class="picker-desc">Votre site est vieux, lent ou peu convaincant. On le transforme en vitrine moderne.</div>
-      <span class="picker-price">À partir de 499 $</span>
+      <p class="card-desc">Votre site est vieux, lent ou peu convaincant. On le transforme en vitrine moderne et convertissante.</p>
+      <button class="card-btn card-btn-default" onclick="document.getElementById('hf-name').scrollIntoView({behavior:'smooth',block:'center'})">Démarrer</button>
+      <div class="card-features-title">Tout dans Vitrine, plus :</div>
+      <ul class="card-features">
+        <li>Audit de votre site actuel</li>
+        <li>SEO technique de base</li>
+        <li>Optimisation des conversions</li>
+        <li>Google Analytics intégré</li>
+        <li>3 mois de support inclus</li>
+      </ul>
     </div>
 
-    <div class="picker-card anim-js delay-3" data-service="Je veux vendre en ligne — boutique e-commerce">
-      <div class="picker-check">✓</div>
-      <div class="picker-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-        </svg>
+    <div class="pricing-card anim-js delay-3">
+      <div class="card-name">E-commerce</div>
+      <div class="card-price-wrap">
+        <span class="card-currency">$</span>
+        <span class="card-amount" data-monthly="899" data-yearly="7 990">899</span>
+        <span class="card-period">/projet</span>
       </div>
-      <div class="picker-name">Lancer ma boutique en ligne</div>
-      <div class="picker-desc">Vendez vos produits 24h/24. Shopify ou WooCommerce, optimisé pour vendre.</div>
-      <span class="picker-price">À partir de 899 $</span>
-    </div>
-
-    <div class="picker-card anim-js delay-1" data-service="Je veux apparaître en premier sur Google — SEO local">
-      <div class="picker-check">✓</div>
-      <div class="picker-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-      </div>
-      <div class="picker-name">Être trouvé sur Google</div>
-      <div class="picker-desc">Votre site existe mais personne ne vous trouve. Stratégie SEO locale au Québec.</div>
-      <span class="picker-price">À partir de 299 $/mois</span>
-    </div>
-
-    <div class="picker-card anim-js delay-2" data-service="Je veux une page de vente performante — landing page">
-      <div class="picker-check">✓</div>
-      <div class="picker-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-        </svg>
-      </div>
-      <div class="picker-name">Une page qui convertit</div>
-      <div class="picker-desc">Landing page ultra-ciblée pour une offre, un service ou une campagne publicitaire.</div>
-      <span class="picker-price">À partir de 349 $</span>
-    </div>
-
-    <div class="picker-card anim-js delay-3" data-service="Je ne sais pas encore — je veux discuter de mon projet">
-      <div class="picker-check">✓</div>
-      <div class="picker-icon-wrap">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-        </svg>
-      </div>
-      <div class="picker-name">Je ne sais pas encore</div>
-      <div class="picker-desc">Pas de problème. Parlons de votre business en 30 min — on trouvera ensemble la meilleure solution.</div>
-      <span class="picker-price">Appel gratuit</span>
+      <p class="card-desc">Vendez vos produits 24h/24. Shopify ou WooCommerce, entièrement optimisé pour vendre.</p>
+      <button class="card-btn card-btn-outline" onclick="document.getElementById('hf-name').scrollIntoView({behavior:'smooth',block:'center'})">Démarrer</button>
+      <div class="card-features-title">Tout dans Refonte Pro, plus :</div>
+      <ul class="card-features">
+        <li>Boutique Shopify ou WooCommerce</li>
+        <li>Intégration de paiement</li>
+        <li>Gestion des stocks</li>
+        <li>SEO e-commerce avancé</li>
+        <li>6 mois de support inclus</li>
+      </ul>
     </div>
 
   </div>
-
-  <div class="picker-action">
-    <a href="#hero" class="picker-cta" id="picker-cta">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-        <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
-      </svg>
-      <span id="picker-cta-label">Demander ma soumission gratuite</span>
-    </a>
-  </div>
-  <p class="picker-hint">Sélectionnez un service pour continuer</p>
 </section>
 
 <!-- Stats -->
@@ -2869,9 +2946,110 @@ const navLinks = document.getElementById('nav-links');
 burger.addEventListener('click', () => navLinks.classList.toggle('open'));
 navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-/* ── Hero canvas — particle field ── */
+/* ── Scroll-Expansion Hero ── */
 (function() {
+  let progress    = 0;
+  let expanded    = false;
+  let touchStartY = 0;
+  const mob = () => window.innerWidth < 768;
+
+  const stage    = document.getElementById('sh-stage');
+  const lock     = document.getElementById('hero-scroll-lock');
+  const hero     = document.getElementById('hero');
+  const media    = document.getElementById('sh-media');
+  const mOverlay = document.getElementById('sh-media-overlay');
+  const bgEl     = document.getElementById('sh-bg');
+  const word1    = document.getElementById('sh-word1');
+  const word2    = document.getElementById('sh-word2');
+  const hint     = document.getElementById('sh-hint');
+  const bar      = document.getElementById('sh-progress');
+
+  if (!stage) return;
+
+  function update(p) {
+    const m = mob();
+    const w = 300 + p * (m ? 650 : 1250);
+    const h = 400 + p * (m ? 200 : 400);
+    media.style.width        = w + 'px';
+    media.style.height       = h + 'px';
+    media.style.borderRadius = (14 * (1 - p)) + 'px';
+    mOverlay.style.opacity   = Math.max(0, 0.45 - p * 0.4);
+    bgEl.style.opacity       = Math.max(0, 1 - p * 1.3);
+    const tx = p * (m ? 180 : 150);
+    word1.style.transform    = `translateX(-${tx}vw)`;
+    word2.style.transform    = `translateX(${tx}vw)`;
+    hint.style.opacity       = Math.max(0, 1 - p * 4);
+    bar.style.width          = (p * 100) + '%';
+  }
+
+  function reveal() {
+    expanded = true;
+    stage.classList.add('done');
+    lock.classList.add('expanded');
+    hero.classList.add('visible');
+    // restart CSS animations inside hero
+    hero.querySelectorAll('.hero-title .line i, .hero-eyebrow, .hero-sub, .hero-actions, .hero-form-wrap').forEach(el => {
+      const a = el.style.animationName || getComputedStyle(el).animationName;
+      if (a && a !== 'none') {
+        el.style.animation = 'none';
+        el.offsetHeight; // reflow
+        el.style.animation = '';
+      }
+    });
+    // start hero canvas particle field after reveal
+    startHeroCanvas();
+  }
+
+  function collapse() {
+    expanded = false;
+    progress = 0;
+    stage.classList.remove('done');
+    lock.classList.remove('expanded');
+    hero.classList.remove('visible');
+    update(0);
+    window.scrollTo(0, 0);
+  }
+
+  function handleWheel(e) {
+    if (expanded) {
+      if (e.deltaY < 0 && window.scrollY <= 5) { collapse(); e.preventDefault(); }
+    } else {
+      e.preventDefault();
+      progress = Math.max(0, Math.min(1, progress + e.deltaY * 0.0009));
+      update(progress);
+      if (progress >= 1) reveal();
+    }
+  }
+
+  function handleTouchMove(e) {
+    if (!touchStartY) return;
+    const delta = touchStartY - e.touches[0].clientY;
+    if (expanded) {
+      if (delta < -20 && window.scrollY <= 5) { collapse(); e.preventDefault(); }
+    } else {
+      e.preventDefault();
+      const factor = delta < 0 ? 0.008 : 0.005;
+      progress = Math.max(0, Math.min(1, progress + delta * factor));
+      update(progress);
+      if (progress >= 1) reveal();
+      touchStartY = e.touches[0].clientY;
+    }
+  }
+
+  window.addEventListener('wheel',      handleWheel,                          { passive: false });
+  window.addEventListener('scroll',     () => { if (!expanded) window.scrollTo(0, 0); });
+  window.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: false });
+  window.addEventListener('touchmove',  handleTouchMove,                      { passive: false });
+  window.addEventListener('touchend',   () => { touchStartY = 0; });
+
+  update(0);
+})();
+
+/* ── Hero canvas — particle field (runs after reveal) ── */
+function startHeroCanvas() {
   const canvas = document.getElementById('hero-canvas');
+  if (!canvas || canvas._started) return;
+  canvas._started = true;
   const ctx = canvas.getContext('2d');
   let W, H, particles = [], mouse = { x: -999, y: -999 };
 
@@ -2881,58 +3059,46 @@ navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => na
   }
   resize();
   window.addEventListener('resize', resize);
-
   document.addEventListener('mousemove', e => {
     const r = canvas.getBoundingClientRect();
     mouse.x = e.clientX - r.left;
     mouse.y = e.clientY - r.top;
   });
 
-  const N = 120;
-  for (let i = 0; i < N; i++) {
+  for (let i = 0; i < 120; i++) {
     particles.push({
-      x: Math.random() * 1400,
-      y: Math.random() * 800,
-      vx: (Math.random() - .5) * .4,
-      vy: (Math.random() - .5) * .4,
-      r: Math.random() * 1.5 + .5,
-      opacity: Math.random() * .5 + .1
+      x: Math.random() * 1400, y: Math.random() * 800,
+      vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4,
+      r: Math.random() * 1.5 + .5, opacity: Math.random() * .5 + .1
     });
   }
 
-  function draw() {
+  (function draw() {
     ctx.clearRect(0, 0, W, H);
-
-    // connections
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const d = Math.sqrt(dx * dx + dy * dy);
+        const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+        const d = Math.sqrt(dx*dx + dy*dy);
         if (d < 140) {
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(4,227,255,${.06 * (1 - d/140)})`;
+          ctx.strokeStyle = `rgba(4,227,255,${.06*(1-d/140)})`;
           ctx.lineWidth = .5;
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
           ctx.stroke();
         }
       }
-      // mouse connection
-      const dx = particles[i].x - mouse.x;
-      const dy = particles[i].y - mouse.y;
+      const dx = particles[i].x - mouse.x, dy = particles[i].y - mouse.y;
       const d = Math.sqrt(dx*dx + dy*dy);
       if (d < 180) {
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(4,227,255,${.2 * (1 - d/180)})`;
+        ctx.strokeStyle = `rgba(4,227,255,${.2*(1-d/180)})`;
         ctx.lineWidth = .8;
         ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(mouse.x, mouse.y);
         ctx.stroke();
       }
     }
-
-    // particles
     particles.forEach(p => {
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
@@ -2942,11 +3108,9 @@ navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => na
       ctx.fillStyle = `rgba(4,227,255,${p.opacity})`;
       ctx.fill();
     });
-
     requestAnimationFrame(draw);
-  }
-  draw();
-})();
+  })();
+}
 
 /* ── Scroll animations ── */
 const observer = new IntersectionObserver((entries) => {
@@ -2993,74 +3157,77 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   document.getElementById('form-success').style.display = 'block';
 });
 
-/* ── Need picker ── */
+/* ── Pricing sparkles ── */
 (function() {
-  const cards = document.querySelectorAll('.picker-card');
-  const cta   = document.getElementById('picker-cta');
-  const ctaLabel = document.getElementById('picker-cta-label');
-  const hint  = document.querySelector('.picker-hint');
-  let selected = null;
+  const canvas = document.getElementById('pricing-sparkles');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const particles = [];
 
-  // radial glow follows mouse inside each card
-  cards.forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-      card.style.setProperty('--my', ((e.clientY - r.top)  / r.height * 100) + '%');
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (let i = 0; i < 130; i++) {
+    particles.push({
+      x: Math.random(), y: Math.random(),
+      size: Math.random() * 1.4 + 0.3,
+      alpha: Math.random() * 0.5 + 0.05,
+      speed: Math.random() * 0.003 + 0.001,
+      dir: Math.random() * Math.PI * 2,
     });
+  }
 
-    card.addEventListener('click', () => {
-      if (selected === card) return; // already selected, scroll only
-      cards.forEach(c => c.classList.remove('selected'));
-      card.classList.add('selected');
-      selected = card;
-
-      const service = card.dataset.service;
-
-      // pre-fill the hero form toggle + service field
-      const serviceSelect = document.getElementById('service');
-      if (serviceSelect) {
-        // match to closest option
-        for (let opt of serviceSelect.options) {
-          if (service.toLowerCase().includes('boutique') || service.toLowerCase().includes('e-commerce')) {
-            if (opt.text.includes('Boutique')) { serviceSelect.value = opt.value; break; }
-          } else if (service.toLowerCase().includes('seo') || service.toLowerCase().includes('google')) {
-            if (opt.text.includes('SEO')) { serviceSelect.value = opt.value; break; }
-          } else if (service.toLowerCase().includes('refaire') || service.toLowerCase().includes('refonte')) {
-            if (opt.text.includes('Refonte')) { serviceSelect.value = opt.value; break; }
-          } else if (service.toLowerCase().includes('page') || service.toLowerCase().includes('convertit')) {
-            if (opt.text.includes('vitrine')) { serviceSelect.value = opt.value; break; }
-          } else if (service.toLowerCase().includes('maintenance')) {
-            if (opt.text.includes('Maintenance')) { serviceSelect.value = opt.value; break; }
-          } else {
-            if (opt.text.includes('Autre')) { serviceSelect.value = opt.value; break; }
-          }
-        }
-      }
-
-      // show CTA
-      const shortName = card.querySelector('.picker-name').textContent;
-      ctaLabel.textContent = '→ ' + shortName + ' — Obtenir ma soumission';
-      cta.classList.add('visible');
-      hint.style.opacity = '0';
-
-      // slight pulse on card
-      card.style.transition = 'none';
-      card.style.transform = 'translateY(-6px) scale(1.01)';
-      setTimeout(() => {
-        card.style.transition = '';
-        card.style.transform = '';
-      }, 150);
+  (function animate() {
+    requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.alpha += (Math.random() - 0.5) * 0.05;
+      p.alpha = Math.max(0.02, Math.min(0.55, p.alpha));
+      p.x += Math.cos(p.dir) * p.speed;
+      p.y += Math.sin(p.dir) * p.speed;
+      if (p.x < 0) p.x = 1; if (p.x > 1) p.x = 0;
+      if (p.y < 0) p.y = 1; if (p.y > 1) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x * canvas.width, p.y * canvas.height, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,' + p.alpha + ')';
+      ctx.fill();
     });
-  });
-
-  // clicking CTA scrolls to hero form
-  cta.addEventListener('click', e => {
-    e.preventDefault();
-    document.getElementById('hf-name').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    setTimeout(() => document.getElementById('hf-name').focus(), 600);
-  });
+  })();
 })();
+
+/* ── Pricing toggle ── */
+window.setPricing = function(mode) {
+  const isYearly = mode === 'yearly';
+  const monthlyBtn = document.getElementById('toggle-monthly');
+  const yearlyBtn  = document.getElementById('toggle-yearly');
+  const pill       = document.getElementById('toggle-pill');
+  if (!pill) return;
+
+  monthlyBtn.classList.toggle('active', !isYearly);
+  yearlyBtn.classList.toggle('active', isYearly);
+
+  const activeBtn   = isYearly ? yearlyBtn : monthlyBtn;
+  const toggleEl    = document.getElementById('pricing-toggle');
+  const toggleRect  = toggleEl.getBoundingClientRect();
+  const btnRect     = activeBtn.getBoundingClientRect();
+  pill.style.left   = (btnRect.left - toggleRect.left) + 'px';
+  pill.style.width  = btnRect.width + 'px';
+
+  document.querySelectorAll('.card-amount').forEach(el => {
+    el.style.opacity = '0';
+    setTimeout(() => {
+      el.textContent  = isYearly ? el.dataset.yearly : el.dataset.monthly;
+      el.style.transition = 'opacity .2s';
+      el.style.opacity = '1';
+    }, 120);
+  });
+};
+
+setTimeout(() => window.setPricing('monthly'), 60);
 
 /* ── Hero toggle: site web oui/non ── */
 const toggleNon = document.getElementById('hf-toggle-non');
