@@ -2276,25 +2276,19 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
       Les meilleurs prix du marché québécois — garanti
     </div>
-    <div class="anim-js delay-3">
-      <div class="pricing-toggle" id="pricing-toggle">
-        <div class="toggle-pill" id="toggle-pill"></div>
-        <button class="toggle-btn active" id="toggle-monthly" onclick="setPricing('monthly')">Mensuel</button>
-        <button class="toggle-btn" id="toggle-yearly" onclick="setPricing('yearly')">Annuel</button>
-      </div>
-    </div>
   </div>
 
   <div class="pricing-grid">
 
     <div class="pricing-card anim-js delay-1">
-      <div class="card-name">Vitrine</div>
+      <div class="card-name">Création de site</div>
+      <div style="font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:.3rem;letter-spacing:.05em;">À partir de</div>
       <div class="card-price-wrap">
         <span class="card-currency">$</span>
-        <span class="card-amount" data-monthly="699" data-yearly="5 990">699</span>
+        <span class="card-amount">699</span>
         <span class="card-period">/projet</span>
       </div>
-      <p class="card-desc">Vous n'avez pas encore de présence en ligne. On bâtit tout from scratch, à votre image.</p>
+      <p class="card-desc">Vous n'avez pas encore de présence en ligne. On conçoit votre site from scratch — design, structure et contenu, à votre image.</p>
       <button class="card-btn card-btn-outline" onclick="document.getElementById('hf-name').scrollIntoView({behavior:'smooth',block:'center'})">Démarrer</button>
       <div class="card-features-title">Ce qui est inclus :</div>
       <ul class="card-features">
@@ -2307,34 +2301,36 @@
     </div>
 
     <div class="pricing-card popular anim-js delay-2">
-      <div class="card-name">Refonte Pro</div>
+      <div class="card-name">Optimisation de site</div>
+      <div style="font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:.3rem;letter-spacing:.05em;">À partir de</div>
       <div class="card-price-wrap">
         <span class="card-currency">$</span>
-        <span class="card-amount" data-monthly="499" data-yearly="3 990">499</span>
+        <span class="card-amount">499</span>
         <span class="card-period">/projet</span>
       </div>
-      <p class="card-desc">Votre site est vieux, lent ou peu convaincant. On le transforme en vitrine moderne et convertissante.</p>
+      <p class="card-desc">Votre site existe déjà mais il est lent, peu visible ou ne convertit pas. On l'améliore en profondeur pour de vrais résultats.</p>
       <button class="card-btn card-btn-default" onclick="document.getElementById('hf-name').scrollIntoView({behavior:'smooth',block:'center'})">Démarrer</button>
-      <div class="card-features-title">Tout dans Vitrine, plus :</div>
+      <div class="card-features-title">Ce qui est inclus :</div>
       <ul class="card-features">
-        <li>Audit de votre site actuel</li>
-        <li>SEO technique de base</li>
-        <li>Optimisation des conversions</li>
-        <li>Google Analytics intégré</li>
+        <li>Audit complet de votre site</li>
+        <li>SEO technique et local</li>
+        <li>Optimisation de la vitesse</li>
+        <li>Amélioration des conversions</li>
         <li>3 mois de support inclus</li>
       </ul>
     </div>
 
     <div class="pricing-card anim-js delay-3">
       <div class="card-name">E-commerce</div>
+      <div style="font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:.3rem;letter-spacing:.05em;">À partir de</div>
       <div class="card-price-wrap">
         <span class="card-currency">$</span>
-        <span class="card-amount" data-monthly="899" data-yearly="7 990">899</span>
+        <span class="card-amount">899</span>
         <span class="card-period">/projet</span>
       </div>
-      <p class="card-desc">Vendez vos produits 24h/24. Shopify ou WooCommerce, entièrement optimisé pour vendre.</p>
+      <p class="card-desc">Vendez vos produits 24h/24. On construit votre boutique Shopify ou WooCommerce, optimisée pour convertir et générer des ventes.</p>
       <button class="card-btn card-btn-outline" onclick="document.getElementById('hf-name').scrollIntoView({behavior:'smooth',block:'center'})">Démarrer</button>
-      <div class="card-features-title">Tout dans Refonte Pro, plus :</div>
+      <div class="card-features-title">Tout dans Optimisation, plus :</div>
       <ul class="card-features">
         <li>Boutique Shopify ou WooCommerce</li>
         <li>Intégration de paiement</li>
@@ -3199,35 +3195,6 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   })();
 })();
 
-/* ── Pricing toggle ── */
-window.setPricing = function(mode) {
-  const isYearly = mode === 'yearly';
-  const monthlyBtn = document.getElementById('toggle-monthly');
-  const yearlyBtn  = document.getElementById('toggle-yearly');
-  const pill       = document.getElementById('toggle-pill');
-  if (!pill) return;
-
-  monthlyBtn.classList.toggle('active', !isYearly);
-  yearlyBtn.classList.toggle('active', isYearly);
-
-  const activeBtn   = isYearly ? yearlyBtn : monthlyBtn;
-  const toggleEl    = document.getElementById('pricing-toggle');
-  const toggleRect  = toggleEl.getBoundingClientRect();
-  const btnRect     = activeBtn.getBoundingClientRect();
-  pill.style.left   = (btnRect.left - toggleRect.left) + 'px';
-  pill.style.width  = btnRect.width + 'px';
-
-  document.querySelectorAll('.card-amount').forEach(el => {
-    el.style.opacity = '0';
-    setTimeout(() => {
-      el.textContent  = isYearly ? el.dataset.yearly : el.dataset.monthly;
-      el.style.transition = 'opacity .2s';
-      el.style.opacity = '1';
-    }, 120);
-  });
-};
-
-setTimeout(() => window.setPricing('monthly'), 60);
 
 /* ── Hero toggle: site web oui/non ── */
 const toggleNon = document.getElementById('hf-toggle-non');
