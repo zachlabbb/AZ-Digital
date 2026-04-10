@@ -1101,59 +1101,83 @@
 
     /* ── Testimonials ── */
     #testimonials { background: #000; }
-    .testimonials-grid {
+    .testimonials-bento {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 1rem;
       margin-top: 4rem;
+      align-items: start;
     }
-    .testimonial {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2.5rem;
-      position: relative;
-      transition: border-color .3s, transform .3s var(--ease);
-    }
-    .testimonial:hover {
-      border-color: rgba(4,227,255,.3);
-      transform: translateY(-4px);
-    }
-    .quote-mark {
-      font-size: 4rem;
-      line-height: .8;
-      color: var(--accent);
-      font-weight: 900;
-      opacity: .3;
-      margin-bottom: 1rem;
-    }
-    .testimonial-text {
-      font-size: .95rem;
-      line-height: 1.75;
-      color: rgba(255,255,255,.7);
-      margin-bottom: 2rem;
-    }
-    .testimonial-author {
+    .testi-col {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 1rem;
     }
-    .author-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent2), var(--accent));
+    .tcard {
+      border-radius: 12px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.08);
+      transition: transform .3s var(--ease), border-color .3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .tcard:hover { transform: translateY(-4px); border-color: rgba(4,227,255,.3); }
+    .tcard.tcard-dark { background: #111; }
+    .tcard.tcard-accent { background: #0057ff; border-color: transparent; }
+    .tcard.tcard-featured {
+      background: #080808;
+      min-height: 240px;
+    }
+    .tcard.tcard-featured::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 60%, transparent 100%);
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 60%, transparent 100%);
+      pointer-events: none;
+    }
+    .tcard-stars {
+      color: #facc15;
+      font-size: .7rem;
+      letter-spacing: 2px;
+      margin-bottom: .75rem;
+    }
+    .tcard-quote {
+      font-size: .88rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,.78);
+      margin-bottom: 1.25rem;
+      font-style: italic;
+    }
+    .tcard-accent .tcard-quote { color: rgba(255,255,255,.93); }
+    .tcard-footer {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: .9rem;
-      color: var(--bg);
+      justify-content: space-between;
+      gap: .75rem;
+      padding-top: .75rem;
+      border-top: 1px solid rgba(255,255,255,.1);
     }
-    .author-name { font-size: .9rem; font-weight: 600; }
-    .author-role { font-size: .75rem; color: rgba(255,255,255,.4); }
+    .tcard-author-name { font-size: .88rem; font-weight: 600; }
+    .tcard-author-role { font-size: .72rem; color: rgba(255,255,255,.42); margin-top: .2rem; line-height: 1.4; }
+    .tcard-accent .tcard-author-role { color: rgba(255,255,255,.65); }
+    .tcard-avatar {
+      width: 44px; height: 44px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .tcard-avatar img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(15%); }
 
     @media (max-width: 900px) {
-      .testimonials-grid { grid-template-columns: 1fr; }
+      .testimonials-bento { grid-template-columns: 1fr; }
     }
 
     /* ── Contact ── */
@@ -1621,13 +1645,6 @@
       filter: grayscale(20%) brightness(.9);
     }
 
-    /* Testimonial photo avatars */
-    .author-avatar img {
-      width: 100%; height: 100%;
-      object-fit: cover; border-radius: 50%;
-      display: block;
-    }
-    .author-avatar { overflow: hidden; }
 
     /* ── 3D CSS Orb ── */
     .orb-wrap {
@@ -2898,40 +2915,107 @@
   <div class="container">
     <p class="section-label anim-js">Témoignages</p>
     <h2 class="section-title anim-js delay-1">Ce que disent nos clients</h2>
-    <div class="testimonials-grid">
+    <div class="testimonials-bento">
 
-      <div class="testimonial anim-js delay-1">
-        <div class="quote-mark">"</div>
-        <p class="testimonial-text">AZ Digital a complètement transformé notre présence en ligne. Depuis la refonte, nos commandes en ligne ont explosé. L'équipe comprend vraiment les besoins des entrepreneurs locaux — ils livrent vite et bien.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar"><img src="https://api.dicebear.com/7.x/personas/svg?seed=MarcA&backgroundColor=001428" alt="Marc" loading="lazy"/></div>
-          <div>
-            <div class="author-name">Marc Antiglio</div>
-            <div class="author-role">Directeur marketing, Poutineville — Montréal</div>
+      <!-- Colonne 1 -->
+      <div class="testi-col">
+        <div class="tcard tcard-featured anim-js delay-1">
+          <div class="tcard-stars">★★★★★</div>
+          <p class="tcard-quote">« AZ Digital a transformé notre présence numérique du tout au tout. Depuis la refonte, nos commandes en ligne ont bondi de 40% et notre taux de rebond a chuté de moitié. Ils ont cerné l'ADN de notre marque et l'ont retranscrit avec brio. Une équipe réactive qui livre sans excuses. »</p>
+          <div class="tcard-footer">
+            <div>
+              <div class="tcard-author-name">Martin Allard</div>
+              <div class="tcard-author-role">Co-fondateur, Comptoir Boréal</div>
+            </div>
+            <div class="tcard-avatar">
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="Marc Antiglio" loading="lazy"/>
+            </div>
+          </div>
+        </div>
+        <div class="tcard tcard-accent anim-js delay-2">
+          <div class="tcard-stars">★★★★★</div>
+          <p class="tcard-quote">« En moins de 3 semaines, on avait un site magnifique qui reflète parfaitement notre identité artisanale. Les réservations ont doublé dès le premier mois. »</p>
+          <div class="tcard-footer">
+            <div>
+              <div class="tcard-author-name">Sandrine Lemay</div>
+              <div class="tcard-author-role">Propriétaire, Boulangerie Épic</div>
+            </div>
+            <div class="tcard-avatar">
+              <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="Sophie Tremblay" loading="lazy"/>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="testimonial anim-js delay-2">
-        <div class="quote-mark">"</div>
-        <p class="testimonial-text">Notre site était lent et vieillissant. AZ Digital l'a refondu en un temps record. La billetterie en ligne est maintenant fluide et nos visiteurs ont augmenté de façon significative dès le premier mois.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar"><img src="https://api.dicebear.com/7.x/personas/svg?seed=NathalieB&backgroundColor=001428" alt="Nathalie" loading="lazy"/></div>
-          <div>
-            <div class="author-name">Nathalie Boivin</div>
-            <div class="author-role">Directrice générale, Cinéma Beaubien — Montréal</div>
+      <!-- Colonne 2 -->
+      <div class="testi-col">
+        <div class="tcard tcard-dark anim-js delay-1">
+          <div class="tcard-stars">★★★★★</div>
+          <p class="tcard-quote">« Notre ancien site datait d'une autre époque. AZ Digital l'a modernisé complètement : billetterie fluide, mobile impeccable, identité visuelle au goût du jour. Résultat : +60% de billets vendus en ligne en 60 jours. »</p>
+          <div class="tcard-footer">
+            <div>
+              <div class="tcard-author-name">Nadia Bérubé</div>
+              <div class="tcard-author-role">Directrice générale, Cinéclub Lumière</div>
+            </div>
+            <div class="tcard-avatar">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" alt="Nathalie Boivin" loading="lazy"/>
+            </div>
+          </div>
+        </div>
+        <div class="tcard tcard-dark anim-js delay-2">
+          <div class="tcard-stars">★★★★★</div>
+          <p class="tcard-quote">« On cherchait une agence qui comprend les petits studios. AZ Digital a livré un site épuré, rapide et qui convertit vraiment. Nos inscriptions aux cours ont grimpé de 35% depuis le lancement. »</p>
+          <div class="tcard-footer">
+            <div>
+              <div class="tcard-author-name">Jonathan Fortin</div>
+              <div class="tcard-author-role">Fondateur, Studio Kama Yoga</div>
+            </div>
+            <div class="tcard-avatar">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="Jean-François Côté" loading="lazy"/>
+            </div>
+          </div>
+        </div>
+        <div class="tcard tcard-dark anim-js delay-3">
+          <div class="tcard-stars">★★★★★</div>
+          <p class="tcard-quote">« Ce qui m'a séduite, c'est leur souci du détail. Chaque section raconte une histoire. Les clients disent avoir eu confiance avant même d'entrer en boutique. Ça n'a pas de prix. »</p>
+          <div class="tcard-footer">
+            <div>
+              <div class="tcard-author-name">Isabelle Marcoux</div>
+              <div class="tcard-author-role">Fondatrice, Atelier Fils & Co</div>
+            </div>
+            <div class="tcard-avatar">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&crop=face" alt="Isabelle Morin" loading="lazy"/>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="testimonial anim-js delay-3">
-        <div class="quote-mark">"</div>
-        <p class="testimonial-text">On voulait un site à la hauteur de notre réputation. AZ Digital a livré exactement ça — moderne, rapide, et notre clientèle nous retrouve facilement sur Google. Excellent travail.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar"><img src="https://api.dicebear.com/7.x/personas/svg?seed=CarlosO&backgroundColor=001428" alt="Carlos" loading="lazy"/></div>
-          <div>
-            <div class="author-name">Carlos Oliveira</div>
-            <div class="author-role">Fondateur, Café Olimpico — Montréal</div>
+      <!-- Colonne 3 -->
+      <div class="testi-col">
+        <div class="tcard tcard-accent anim-js delay-2">
+          <div class="tcard-stars">★★★★★</div>
+          <p class="tcard-quote">« AZ Digital a su capturer l'âme de notre café dans chaque pixel. Site rapide, beau, et nos nouveaux clients nous trouvent maintenant facilement sur Google. »</p>
+          <div class="tcard-footer">
+            <div>
+              <div class="tcard-author-name">Carlos Ferreira</div>
+              <div class="tcard-author-role">Fondateur, Café Nordico</div>
+            </div>
+            <div class="tcard-avatar">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop&crop=face" alt="Carlos Oliveira" loading="lazy"/>
+            </div>
+          </div>
+        </div>
+        <div class="tcard tcard-featured anim-js delay-3">
+          <div class="tcard-stars">★★★★★</div>
+          <p class="tcard-quote">« J'avais eu de mauvaises expériences avec d'autres agences. AZ Digital a tout changé : délais tenus, budget respecté, résultats concrets dès le premier mois. Notre chiffre d'affaires en ligne a progressé de 55% depuis le lancement. Je les recommande sans hésitation à tous les restaurateurs de Montréal. »</p>
+          <div class="tcard-footer">
+            <div>
+              <div class="tcard-author-name">François Beaudet</div>
+              <div class="tcard-author-role">Chef & Propriétaire, Bistro Le Sarrasin</div>
+            </div>
+            <div class="tcard-avatar">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt="Frédéric Beauchamp" loading="lazy"/>
+            </div>
           </div>
         </div>
       </div>
@@ -3176,7 +3260,7 @@ function animateCursor() {
   requestAnimationFrame(animateCursor);
 }
 animateCursor();
-document.querySelectorAll('a,button,input,textarea,select,.service-card,.testimonial').forEach(el => {
+document.querySelectorAll('a,button,input,textarea,select,.service-card,.tcard').forEach(el => {
   el.addEventListener('mouseenter', () => {
     cursor.style.width = '24px'; cursor.style.height = '24px';
     ring.style.width = '60px'; ring.style.height = '60px';
@@ -3200,8 +3284,8 @@ burger.addEventListener('click', () => navLinks.classList.toggle('open'));
 navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
 
-/* ── Hero canvas — particle field (runs after reveal) ── */
-function startHeroCanvas() {
+/* ── Hero canvas — particle field ── */
+(function startHeroCanvas() {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas || canvas._started) return;
   canvas._started = true;
@@ -3267,7 +3351,7 @@ function startHeroCanvas() {
     });
     requestAnimationFrame(draw);
   })();
-}
+})();
 
 /* ── Scroll animations ── */
 const observer = new IntersectionObserver((entries) => {
