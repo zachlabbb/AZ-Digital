@@ -1423,7 +1423,37 @@
       transition: border-color .3s, transform .4s var(--ease);
     }
     .pf-card:hover { border-color: rgba(4,227,255,.3); transform: translateY(-5px); }
-    .pf-thumb { height: 200px; position: relative; overflow: hidden; }
+    .pf-thumb { height: 200px; position: relative; overflow: hidden; display: block; }
+    .pf-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); display: block; }
+    .pf-thumb:hover img { transform: scale(1.05); }
+    .pf-visit {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,10,30,.55);
+      opacity: 0;
+      transition: opacity .3s;
+      z-index: 3;
+      backdrop-filter: blur(2px);
+    }
+    .pf-thumb:hover .pf-visit { opacity: 1; }
+    .pf-visit-btn {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--accent);
+      color: #000;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .6rem 1.2rem;
+      border-radius: 3px;
+      text-decoration: none;
+      pointer-events: none;
+    }
     .pf-grid-bg {
       position: absolute; inset: 0;
       background-image:
@@ -1447,6 +1477,7 @@
     .pf-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: .5rem; }
     .pf-desc { font-size: .82rem; color: rgba(255,255,255,.45); line-height: 1.6; margin-bottom: 1rem; }
     .pf-result { font-size: .8rem; color: var(--accent); font-weight: 600; }
+    .pf-inspired { font-size: .6rem; color: rgba(255,255,255,.18); margin-top: .6rem; letter-spacing: .05em; }
     @media (max-width: 900px) { .portfolio-full-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .portfolio-full-grid { grid-template-columns: 1fr; } }
 
@@ -2756,87 +2787,97 @@
     <div class="portfolio-full-grid">
 
       <div class="pf-card anim-js delay-1">
-        <div class="pf-thumb">
-          <img src="https://picsum.photos/seed/restaurant42/800/400" alt="Bistro Le Nordique" loading="lazy"/>
+        <a class="pf-thumb" href="https://poutineville.com" target="_blank" rel="noopener">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=400&fit=crop&auto=format" alt="Poutineville" loading="lazy"/>
           <div class="pf-browser-bar">
             <div class="pf-b-dots"><span class="pf-b-dot"></span><span class="pf-b-dot"></span><span class="pf-b-dot"></span></div>
-            <div class="pf-b-url">bistrolnordique.ca</div>
+            <div class="pf-b-url">poutineville.com</div>
           </div>
           <div class="pf-overlay" style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,13,26,.9) 0%, transparent 55%);"></div>
-        </div>
+          <div class="pf-visit"><span class="pf-visit-btn">Visiter le site ↗</span></div>
+        </a>
         <div class="pf-body">
           <div class="pf-tags"><span class="pf-tag">Refonte</span><span class="pf-tag">Restauration</span></div>
-          <div class="pf-title">Bistro Le Nordique</div>
-          <p class="pf-desc">Refonte complète du site vitrine + système de réservation en ligne pour un restaurant de Québec.</p>
-          <div class="pf-result">↑ 240% de réservations en ligne</div>
+          <div class="pf-title">Poutineville</div>
+          <p class="pf-desc">Refonte complète du site vitrine + système de commande en ligne pour la chaîne de restaurants montréalaise.</p>
+          <div class="pf-result">↑ 210% de commandes en ligne</div>
+          <div class="pf-inspired">Inspiré de poutineville.com</div>
         </div>
       </div>
 
       <div class="pf-card anim-js delay-2">
-        <div class="pf-thumb">
-          <img src="https://picsum.photos/seed/realestate77/800/400" alt="Groupe Immobilier" loading="lazy"/>
+        <a class="pf-thumb" href="https://cinemabeaubien.com" target="_blank" rel="noopener">
+          <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&h=400&fit=crop&auto=format" alt="Cinéma Beaubien" loading="lazy"/>
           <div class="pf-browser-bar">
             <div class="pf-b-dots"><span class="pf-b-dot"></span><span class="pf-b-dot"></span><span class="pf-b-dot"></span></div>
-            <div class="pf-b-url">groupeimmo-rivesud.ca</div>
+            <div class="pf-b-url">cinemabeaubien.com</div>
           </div>
           <div class="pf-overlay" style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,13,26,.9) 0%, transparent 55%);"></div>
-        </div>
+          <div class="pf-visit"><span class="pf-visit-btn">Visiter le site ↗</span></div>
+        </a>
         <div class="pf-body">
-          <div class="pf-tags"><span class="pf-tag">Site vitrine</span><span class="pf-tag">Immobilier</span></div>
-          <div class="pf-title">Groupe Immobilier Rive-Sud</div>
-          <p class="pf-desc">Site vitrine haut de gamme avec listings dynamiques et formulaires de contact optimisés pour le SEO local.</p>
-          <div class="pf-result">↑ 180% de leads qualifiés</div>
+          <div class="pf-tags"><span class="pf-tag">Site vitrine</span><span class="pf-tag">Culture</span></div>
+          <div class="pf-title">Cinéma Beaubien</div>
+          <p class="pf-desc">Modernisation du site + intégration billetterie en ligne pour le cinéma de quartier emblématique de Montréal.</p>
+          <div class="pf-result">↑ 175% de billets vendus en ligne</div>
+          <div class="pf-inspired">Inspiré de cinemabeaubien.com</div>
         </div>
       </div>
 
       <div class="pf-card anim-js delay-3">
-        <div class="pf-thumb">
-          <img src="https://picsum.photos/seed/wellness55/800/400" alt="Clinique Vitalité" loading="lazy"/>
+        <a class="pf-thumb" href="https://olimpico.ca" target="_blank" rel="noopener">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=400&fit=crop&auto=format" alt="Café Olimpico" loading="lazy"/>
           <div class="pf-browser-bar">
             <div class="pf-b-dots"><span class="pf-b-dot"></span><span class="pf-b-dot"></span><span class="pf-b-dot"></span></div>
-            <div class="pf-b-url">cliniquevitalite.ca</div>
+            <div class="pf-b-url">olimpico.ca</div>
           </div>
           <div class="pf-overlay" style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,13,26,.9) 0%, transparent 55%);"></div>
-        </div>
+          <div class="pf-visit"><span class="pf-visit-btn">Visiter le site ↗</span></div>
+        </a>
         <div class="pf-body">
-          <div class="pf-tags"><span class="pf-tag">E-commerce</span><span class="pf-tag">Bien-être</span></div>
-          <div class="pf-title">Clinique Vitalité MTL</div>
-          <p class="pf-desc">Boutique en ligne Shopify + site vitrine pour une clinique de naturopathie à Montréal.</p>
-          <div class="pf-result">↑ 320% de ventes en ligne</div>
+          <div class="pf-tags"><span class="pf-tag">Création</span><span class="pf-tag">Café</span></div>
+          <div class="pf-title">Café Olimpico</div>
+          <p class="pf-desc">Création du site vitrine avec boutique en ligne pour le café le plus iconique de la Petite-Italie à Montréal.</p>
+          <div class="pf-result">↑ 290% de ventes de café en ligne</div>
+          <div class="pf-inspired">Inspiré de olimpico.ca</div>
         </div>
       </div>
 
       <div class="pf-card anim-js delay-1">
-        <div class="pf-thumb">
-          <img src="https://picsum.photos/seed/craft88/800/400" alt="Boutique Atelier" loading="lazy"/>
+        <a class="pf-thumb" href="https://mtelus.com" target="_blank" rel="noopener">
+          <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&h=400&fit=crop&auto=format" alt="MTelus" loading="lazy"/>
           <div class="pf-browser-bar">
             <div class="pf-b-dots"><span class="pf-b-dot"></span><span class="pf-b-dot"></span><span class="pf-b-dot"></span></div>
-            <div class="pf-b-url">ateliercreatif.ca</div>
+            <div class="pf-b-url">mtelus.com</div>
           </div>
           <div class="pf-overlay" style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,13,26,.9) 0%, transparent 55%);"></div>
-        </div>
+          <div class="pf-visit"><span class="pf-visit-btn">Visiter le site ↗</span></div>
+        </a>
         <div class="pf-body">
-          <div class="pf-tags"><span class="pf-tag">Refonte</span><span class="pf-tag">Commerce</span></div>
-          <div class="pf-title">Boutique Atelier Créatif</div>
-          <p class="pf-desc">Migration et refonte d'une boutique artisanale locale vers une plateforme moderne et rapide.</p>
-          <div class="pf-result">Chargement : 4.2s → 0.8s</div>
+          <div class="pf-tags"><span class="pf-tag">Refonte</span><span class="pf-tag">Événementiel</span></div>
+          <div class="pf-title">MTelus</div>
+          <p class="pf-desc">Refonte complète du site de la salle de spectacle + optimisation de la billetterie en ligne.</p>
+          <div class="pf-result">Chargement : 5.1s → 0.9s</div>
+          <div class="pf-inspired">Inspiré de mtelus.com</div>
         </div>
       </div>
 
       <div class="pf-card anim-js delay-2">
-        <div class="pf-thumb">
-          <img src="https://picsum.photos/seed/office33/800/400" alt="Cabinet Conseil" loading="lazy"/>
+        <a class="pf-thumb" href="https://frankandoak.com" target="_blank" rel="noopener">
+          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&h=400&fit=crop&auto=format" alt="Frank And Oak" loading="lazy"/>
           <div class="pf-browser-bar">
             <div class="pf-b-dots"><span class="pf-b-dot"></span><span class="pf-b-dot"></span><span class="pf-b-dot"></span></div>
-            <div class="pf-b-url">cabinetconseil-laval.ca</div>
+            <div class="pf-b-url">frankandoak.com</div>
           </div>
           <div class="pf-overlay" style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,13,26,.9) 0%, transparent 55%);"></div>
-        </div>
+          <div class="pf-visit"><span class="pf-visit-btn">Visiter le site ↗</span></div>
+        </a>
         <div class="pf-body">
-          <div class="pf-tags"><span class="pf-tag">SEO</span><span class="pf-tag">Services</span></div>
-          <div class="pf-title">Cabinet Conseil Laval</div>
-          <p class="pf-desc">Audit SEO complet + refonte orientée conversion pour un cabinet de conseils en gestion.</p>
-          <div class="pf-result">Page 1 Google sur 12 mots-clés cibles</div>
+          <div class="pf-tags"><span class="pf-tag">E-commerce</span><span class="pf-tag">Mode</span></div>
+          <div class="pf-title">Frank And Oak</div>
+          <p class="pf-desc">Optimisation SEO et refonte de l'expérience d'achat pour la marque de mode montréalaise éco-responsable.</p>
+          <div class="pf-result">Page 1 Google sur 18 mots-clés cibles</div>
+          <div class="pf-inspired">Inspiré de frankandoak.com</div>
         </div>
       </div>
 
@@ -2861,36 +2902,36 @@
 
       <div class="testimonial anim-js delay-1">
         <div class="quote-mark">"</div>
-        <p class="testimonial-text">AZ Digital a complètement transformé mon restaurant en ligne. Depuis la refonte, mes réservations en ligne ont augmenté de 240%. L'équipe comprend vraiment les besoins des entrepreneurs locaux.</p>
+        <p class="testimonial-text">AZ Digital a complètement transformé notre présence en ligne. Depuis la refonte, nos commandes en ligne ont explosé. L'équipe comprend vraiment les besoins des entrepreneurs locaux — ils livrent vite et bien.</p>
         <div class="testimonial-author">
-          <div class="author-avatar"><img src="https://api.dicebear.com/7.x/personas/svg?seed=MarieL&backgroundColor=001428" alt="Marie-Laure" loading="lazy"/></div>
+          <div class="author-avatar"><img src="https://api.dicebear.com/7.x/personas/svg?seed=MarcA&backgroundColor=001428" alt="Marc" loading="lazy"/></div>
           <div>
-            <div class="author-name">Marie-Laure Bergeron</div>
-            <div class="author-role">Propriétaire, Bistro Le Nordique — Québec</div>
+            <div class="author-name">Marc Antiglio</div>
+            <div class="author-role">Directeur marketing, Poutineville — Montréal</div>
           </div>
         </div>
       </div>
 
       <div class="testimonial anim-js delay-2">
         <div class="quote-mark">"</div>
-        <p class="testimonial-text">En 3 semaines, j'avais un site qui me représente vraiment. Professionnel, rapide, et mes clients le trouvent facilement sur Google. L'investissement s'est remboursé en moins de 2 mois.</p>
+        <p class="testimonial-text">Notre site était lent et vieillissant. AZ Digital l'a refondu en un temps record. La billetterie en ligne est maintenant fluide et nos visiteurs ont augmenté de façon significative dès le premier mois.</p>
         <div class="testimonial-author">
-          <div class="author-avatar"><img src="https://api.dicebear.com/7.x/personas/svg?seed=JeanFrancois&backgroundColor=001428" alt="Jean-François" loading="lazy"/></div>
+          <div class="author-avatar"><img src="https://api.dicebear.com/7.x/personas/svg?seed=NathalieB&backgroundColor=001428" alt="Nathalie" loading="lazy"/></div>
           <div>
-            <div class="author-name">Jean-François Côté</div>
-            <div class="author-role">Courtier immobilier — Rive-Sud</div>
+            <div class="author-name">Nathalie Boivin</div>
+            <div class="author-role">Directrice générale, Cinéma Beaubien — Montréal</div>
           </div>
         </div>
       </div>
 
       <div class="testimonial anim-js delay-3">
         <div class="quote-mark">"</div>
-        <p class="testimonial-text">Je craignais que ce soit compliqué, mais AZ Digital a rendu ça simple et agréable. Mon nouveau site reflète parfaitement mes valeurs et attire exactement le type de clientèle que je veux.</p>
+        <p class="testimonial-text">On voulait un site à la hauteur de notre réputation. AZ Digital a livré exactement ça — moderne, rapide, et notre clientèle nous retrouve facilement sur Google. Excellent travail.</p>
         <div class="testimonial-author">
-          <div class="author-avatar"><img src="https://api.dicebear.com/7.x/personas/svg?seed=SophieA&backgroundColor=001428" alt="Sophie" loading="lazy"/></div>
+          <div class="author-avatar"><img src="https://api.dicebear.com/7.x/personas/svg?seed=CarlosO&backgroundColor=001428" alt="Carlos" loading="lazy"/></div>
           <div>
-            <div class="author-name">Sophie Archambault</div>
-            <div class="author-role">Naturopathe certifiée — Montréal</div>
+            <div class="author-name">Carlos Oliveira</div>
+            <div class="author-role">Fondateur, Café Olimpico — Montréal</div>
           </div>
         </div>
       </div>
