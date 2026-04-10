@@ -2138,6 +2138,69 @@
       box-shadow: 0 -13px 80px 0 rgba(9,0,255,.35), 0 0 0 1px rgba(37,99,235,.3);
       z-index: 3;
     }
+
+    /* ── Optimisation card visual ── */
+    .optim-visual {
+      background: #0a0a18;
+      border: 1px solid rgba(37,99,235,.25);
+      border-radius: 10px;
+      padding: 1rem 1.1rem .9rem;
+      margin-bottom: 1.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .optim-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(37,99,235,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .optim-scores {
+      display: flex;
+      gap: .7rem;
+      align-items: stretch;
+      margin-bottom: .75rem;
+    }
+    .optim-score-box {
+      flex: 1;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 7px;
+      padding: .55rem .6rem;
+      text-align: center;
+    }
+    .optim-score-label { font-size: .6rem; color: rgba(255,255,255,.35); letter-spacing: .07em; text-transform: uppercase; margin-bottom: .3rem; }
+    .optim-score-val { font-size: 1.3rem; font-weight: 700; line-height: 1; }
+    .optim-score-val.bad  { color: #ef4444; }
+    .optim-score-val.good { color: #22c55e; }
+    .optim-arrow {
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; color: rgba(255,255,255,.3);
+      flex-shrink: 0; padding: 0 .1rem;
+    }
+    .optim-bar-row { display: flex; align-items: center; gap: .6rem; }
+    .optim-bar-label { font-size: .62rem; color: rgba(255,255,255,.3); flex-shrink: 0; width: 52px; }
+    .optim-bar-track {
+      flex: 1; height: 5px;
+      background: rgba(255,255,255,.07);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .optim-bar-fill {
+      height: 100%; border-radius: 99px;
+      background: linear-gradient(to right, #3b82f6, #04E3FF);
+      width: 88%;
+    }
+    .optim-bar-fill.slow { background: #ef4444; width: 28%; }
+    .optim-tag {
+      position: absolute; top: .65rem; right: .7rem;
+      font-size: .6rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      background: rgba(37,99,235,.25); color: #93c5fd;
+      border: 1px solid rgba(37,99,235,.4);
+      border-radius: 4px; padding: .15rem .45rem;
+    }
+    .card-features b { color: #fff; font-weight: 600; }
     .card-name { font-size: 1.9rem; font-weight: 600; color: #fff; margin-bottom: .9rem; }
     .card-price-wrap { display: flex; align-items: baseline; gap: .2rem; margin-bottom: .5rem; }
     .card-currency { font-size: 1.5rem; font-weight: 700; color: #fff; }
@@ -2498,9 +2561,9 @@
       <ul class="card-features">
         <li>Design sur mesure</li>
         <li>Jusqu'à 5 pages</li>
-        <li>Optimisation mobile</li>
+        <li>Version mobile</li>
         <li>Formulaire de contact</li>
-        <li>1 mois de support inclus</li>
+        <li>Site clair et professionnel</li>
       </ul>
     </div>
 
@@ -2512,15 +2575,15 @@
         <span class="card-amount">499</span>
         <span class="card-period">/projet</span>
       </div>
-      <p class="card-desc">Votre site existe déjà mais il est lent, peu visible ou ne convertit pas. On l'améliore en profondeur pour de vrais résultats.</p>
+      <p class="card-desc">Votre site existe déjà, mais il est lent, dépassé ou peu efficace. On améliore son apparence, sa rapidité et son expérience pour lui donner un aspect plus moderne et professionnel.</p>
       <button class="card-btn card-btn-default" onclick="selectPlan('Optimisation de site')">Démarrer</button>
       <div class="card-features-title">Ce qui est inclus :</div>
       <ul class="card-features">
-        <li>Audit complet de votre site</li>
-        <li>SEO technique et local</li>
-        <li>Optimisation de la vitesse</li>
-        <li>Amélioration des conversions</li>
-        <li>3 mois de support inclus</li>
+        <li>Analyse complète du site</li>
+        <li>Interface modernisée</li>
+        <li>Site plus rapide</li>
+        <li>Navigation plus claire</li>
+        <li>Plus de demandes de clients</li>
       </ul>
     </div>
 
@@ -2540,7 +2603,6 @@
         <li>Intégration de paiement</li>
         <li>Gestion des stocks</li>
         <li>SEO e-commerce avancé</li>
-        <li>6 mois de support inclus</li>
       </ul>
     </div>
 
@@ -3153,7 +3215,8 @@
             </div>
             <div class="detail-text">
               <strong>Téléphone</strong>
-              <a href="tel:+14385233409">438-523-3409</a>
+              <a href="tel:+14385233409">438-523-3409</a><br>
+              <a href="tel:+15145138496">514 513-8496</a>
             </div>
           </div>
           <div class="contact-detail anim-js delay-4">
