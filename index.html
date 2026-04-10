@@ -218,6 +218,72 @@
       inset: 0;
       width: 100%; height: 100%;
     }
+    #hero-moon {
+      position: absolute;
+      top: 10%;
+      right: 8%;
+      width: 140px;
+      height: 140px;
+      z-index: 1;
+      animation: moonFloat 8s ease-in-out infinite;
+      pointer-events: none;
+      transform-style: preserve-3d;
+      perspective: 600px;
+    }
+    #hero-moon .moon-body {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55) 0%, transparent 35%),
+        radial-gradient(circle at 68% 72%, rgba(0,0,0,0.45) 0%, transparent 55%),
+        radial-gradient(circle at 50% 50%, #c8dff5 0%, #8ab4e8 30%, #4a7fc1 60%, #1a3a6e 85%, #0a1a3a 100%);
+      box-shadow:
+        inset -30px -20px 60px rgba(0,0,0,0.7),
+        inset 10px 10px 30px rgba(255,255,255,0.12),
+        0 0 50px rgba(120,180,255,0.35),
+        0 0 100px rgba(60,120,255,0.15);
+      position: relative;
+      overflow: hidden;
+      animation: moonSpin 30s linear infinite;
+    }
+    #hero-moon .moon-crater {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.08), rgba(0,0,0,0.3));
+      box-shadow: inset 2px 2px 4px rgba(0,0,0,0.4), inset -1px -1px 2px rgba(255,255,255,0.1);
+    }
+    #hero-moon .crater-1 { width: 22px; height: 22px; top: 26%; left: 52%; }
+    #hero-moon .crater-2 { width: 13px; height: 13px; top: 56%; left: 35%; }
+    #hero-moon .crater-3 { width: 9px;  height: 9px;  top: 35%; left: 65%; }
+    #hero-moon .crater-4 { width: 16px; height: 16px; top: 65%; left: 55%; }
+    #hero-moon .moon-highlight {
+      position: absolute;
+      top: 8%; left: 12%;
+      width: 38%; height: 35%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.28) 0%, transparent 70%);
+      transform: rotate(-30deg);
+    }
+    #hero-moon .moon-glow {
+      position: absolute;
+      inset: -40px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(100,180,255,0.18) 0%, transparent 65%);
+      animation: moonGlow 4s ease-in-out infinite alternate;
+    }
+    @keyframes moonFloat {
+      0%, 100% { transform: translateY(0px) rotateX(8deg) rotateY(-5deg); }
+      50%       { transform: translateY(-20px) rotateX(-5deg) rotateY(8deg); }
+    }
+    @keyframes moonSpin {
+      from { filter: hue-rotate(0deg); }
+      to   { filter: hue-rotate(8deg); }
+    }
+    @keyframes moonGlow {
+      from { opacity: 0.5; transform: scale(1); }
+      to   { opacity: 1;   transform: scale(1.15); }
+    }
     .hero-gradient {
       position: absolute;
       inset: 0;
@@ -527,7 +593,37 @@
     }
 
     /* ── Sections ── */
-    section { padding: 8rem 3rem; }
+    section {
+      padding: 8rem 3rem;
+      position: relative;
+      overflow: hidden;
+      background: #000;
+    }
+    section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size: 70px 80px;
+      pointer-events: none;
+      z-index: 0;
+      -webkit-mask-image: radial-gradient(50% 40% at 50% 0%, white, transparent);
+      mask-image: radial-gradient(50% 40% at 50% 0%, white, transparent);
+    }
+    section::after {
+      content: '';
+      position: absolute;
+      left: 10%; right: 10%;
+      top: 0; height: 100%;
+      background: radial-gradient(circle at center, #206ce8 0%, transparent 70%);
+      opacity: 0.18;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      z-index: 0;
+    }
+    section > * { position: relative; z-index: 1; }
     .container { max-width: 1200px; margin: 0 auto; }
 
     .section-label {
@@ -600,7 +696,7 @@
     }
 
     /* ── Services ── */
-    #services { background: var(--bg); }
+    #services { background: #000; }
     .services-header {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -683,7 +779,7 @@
     }
 
     /* ── Process ── */
-    #process { background: var(--bg2); }
+    #process { background: #000; }
     .process-steps {
       margin-top: 5rem;
       display: grid;
@@ -724,7 +820,7 @@
     }
 
     /* ── About ── */
-    #about { background: var(--bg); }
+    #about { background: #000; }
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -861,7 +957,7 @@
     }
 
     /* ── Testimonials ── */
-    #testimonials { background: var(--bg); }
+    #testimonials { background: #000; }
     .testimonials-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1727,7 +1823,7 @@
       overflow: hidden;
       text-align: center;
     }
-    #pricing-sparkles {
+    #pricing-sparkles, .section-sparkles {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -1943,6 +2039,17 @@
 
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
+  <canvas class="section-sparkles"></canvas>
+  <div id="hero-moon">
+    <div class="moon-glow"></div>
+    <div class="moon-body">
+      <div class="moon-highlight"></div>
+      <div class="moon-crater crater-1"></div>
+      <div class="moon-crater crater-2"></div>
+      <div class="moon-crater crater-3"></div>
+      <div class="moon-crater crater-4"></div>
+    </div>
+  </div>
   <div class="hero-blobs">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
@@ -2205,6 +2312,7 @@
 
 <!-- Stats -->
 <section id="stats">
+  <canvas class="section-sparkles"></canvas>
   <div class="container">
     <div class="stats-grid">
       <div class="stat-item anim-js">
@@ -2229,6 +2337,7 @@
 
 <!-- Services (removed — replaced by need-picker)
 <section id="services">
+  <canvas class="section-sparkles"></canvas>
   <div class="container">
     <div class="services-header">
       <div>
@@ -2346,6 +2455,7 @@
 
 <!-- Process -->
 <section id="process">
+  <canvas class="section-sparkles"></canvas>
   <div class="container">
     <p class="section-label anim-js">Notre approche</p>
     <h2 class="section-title anim-js delay-1">Un processus simple,<br />des résultats concrets</h2>
@@ -2388,7 +2498,8 @@
 </section>
 
 <!-- Portfolio -->
-<section id="portfolio" style="background:var(--bg2);border-top:1px solid var(--border);">
+<section id="portfolio" style="background:#000;border-top:1px solid var(--border);">
+  <canvas class="section-sparkles"></canvas>
   <div class="container">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem;margin-bottom:0;">
       <div>
@@ -2498,6 +2609,7 @@
 
 <!-- Testimonials -->
 <section id="testimonials">
+  <canvas class="section-sparkles"></canvas>
   <div class="container">
     <p class="section-label anim-js">Témoignages</p>
     <h2 class="section-title anim-js delay-1">Ce que disent nos clients</h2>
@@ -2545,7 +2657,8 @@
 
 
 <!-- About -->
-<section id="about" style="background: var(--bg2);">
+<section id="about" style="background: #000;">
+  <canvas class="section-sparkles"></canvas>
   <div class="container">
     <div style="text-align:center;max-width:740px;margin:0 auto 5rem;">
       <p class="section-label anim-js">L'équipe fondatrice</p>
@@ -2622,6 +2735,7 @@
 
 <!-- Contact -->
 <section id="contact">
+  <canvas class="section-sparkles"></canvas>
   <div class="container">
     <div class="contact-grid">
       <div class="contact-info">
@@ -2915,46 +3029,51 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   document.getElementById('form-success').style.display = 'block';
 });
 
-/* ── Pricing sparkles ── */
+/* ── Sparkles — toutes les sections ── */
 (function() {
-  const canvas = document.getElementById('pricing-sparkles');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const particles = [];
+  function initSparkles(canvas) {
+    if (!canvas || canvas._started) return;
+    canvas._started = true;
+    const ctx = canvas.getContext('2d');
+    const particles = [];
 
-  function resize() {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+    function resize() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    for (let i = 0; i < 130; i++) {
+      particles.push({
+        x: Math.random(), y: Math.random(),
+        size: Math.random() * 1.4 + 0.3,
+        alpha: Math.random() * 0.5 + 0.05,
+        speed: Math.random() * 0.003 + 0.001,
+        dir: Math.random() * Math.PI * 2,
+      });
+    }
+
+    (function animate() {
+      requestAnimationFrame(animate);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.alpha += (Math.random() - 0.5) * 0.05;
+        p.alpha = Math.max(0.02, Math.min(0.55, p.alpha));
+        p.x += Math.cos(p.dir) * p.speed;
+        p.y += Math.sin(p.dir) * p.speed;
+        if (p.x < 0) p.x = 1; if (p.x > 1) p.x = 0;
+        if (p.y < 0) p.y = 1; if (p.y > 1) p.y = 0;
+        ctx.beginPath();
+        ctx.arc(p.x * canvas.width, p.y * canvas.height, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,' + p.alpha + ')';
+        ctx.fill();
+      });
+    })();
   }
-  resize();
-  window.addEventListener('resize', resize);
 
-  for (let i = 0; i < 130; i++) {
-    particles.push({
-      x: Math.random(), y: Math.random(),
-      size: Math.random() * 1.4 + 0.3,
-      alpha: Math.random() * 0.5 + 0.05,
-      speed: Math.random() * 0.003 + 0.001,
-      dir: Math.random() * Math.PI * 2,
-    });
-  }
-
-  (function animate() {
-    requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
-      p.alpha += (Math.random() - 0.5) * 0.05;
-      p.alpha = Math.max(0.02, Math.min(0.55, p.alpha));
-      p.x += Math.cos(p.dir) * p.speed;
-      p.y += Math.sin(p.dir) * p.speed;
-      if (p.x < 0) p.x = 1; if (p.x > 1) p.x = 0;
-      if (p.y < 0) p.y = 1; if (p.y > 1) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x * canvas.width, p.y * canvas.height, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255,255,255,' + p.alpha + ')';
-      ctx.fill();
-    });
-  })();
+  document.getElementById('pricing-sparkles') && initSparkles(document.getElementById('pricing-sparkles'));
+  document.querySelectorAll('.section-sparkles').forEach(initSparkles);
 })();
 
 
