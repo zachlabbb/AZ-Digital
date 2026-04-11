@@ -3752,6 +3752,8 @@ const toggleOui = document.getElementById('hf-toggle-oui');
 const websiteGroup = document.getElementById('hf-website-group');
 
 toggleNon.addEventListener('click', () => {
+  // Bloquer si Optimisation est sélectionné
+  if (document.getElementById('hf-service').value === 'Optimisation de site') return;
   toggleNon.classList.add('active');
   toggleOui.classList.remove('active');
   websiteGroup.style.display = 'none';
