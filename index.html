@@ -3760,6 +3760,8 @@ toggleNon.addEventListener('click', () => {
   websiteGroup.style.animation = '';
 });
 toggleOui.addEventListener('click', () => {
+  // Bloquer si Création de site est sélectionné
+  if (document.getElementById('hf-service').value === 'Création de site') return;
   toggleOui.classList.add('active');
   toggleNon.classList.remove('active');
   websiteGroup.style.display = 'block';
