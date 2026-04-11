@@ -3736,6 +3736,13 @@ document.querySelectorAll('.hf-service-btn').forEach(btn => {
     document.querySelectorAll('.hf-service-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('hf-service').value = btn.dataset.service;
+
+    // Optimisation = forcément un site existant
+    if (btn.dataset.service === 'Optimisation de site') {
+      document.getElementById('hf-toggle-oui').click();
+    } else {
+      document.getElementById('hf-toggle-non').click();
+    }
   });
 });
 
