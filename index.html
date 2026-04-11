@@ -2188,8 +2188,6 @@
     /* ── Founders strip ── */
     .founders-strip {
       background: #000;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
       padding: 4rem 3rem;
       position: relative;
       overflow: hidden;
@@ -2297,16 +2295,17 @@
     /* ── Horizontal marquee ── */
     .marquee-wrapper {
       overflow: hidden;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
       padding: 1.5rem 0;
       background: var(--bg);
+      position: relative;
     }
     .marquee-track {
       display: flex;
       gap: 4rem;
       width: max-content;
       animation: marquee 20s linear infinite;
+      position: relative;
+      z-index: 1;
     }
     .marquee-item {
       font-size: .75rem;
@@ -2777,38 +2776,10 @@
   </div>
   </section>
 
-<!-- Bandeau de confiance -->
-<div class="trust-bar">
-  <div class="trust-bar-inner">
-    <div class="trust-bar-item">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      Livraison en 3 à 10 jours
-    </div>
-    <div class="trust-bar-dot"></div>
-    <div class="trust-bar-item">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      Aucun engagement
-    </div>
-    <div class="trust-bar-dot"></div>
-    <div class="trust-bar-item">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      100% fait au Québec
-    </div>
-    <div class="trust-bar-dot"></div>
-    <div class="trust-bar-item">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      Soumission gratuite
-    </div>
-    <div class="trust-bar-dot"></div>
-    <div class="trust-bar-item">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      À partir de 499$
-    </div>
-  </div>
-</div>
 
 <!-- Marquee -->
 <div class="marquee-wrapper">
+  <canvas class="section-sparkles"></canvas>
   <div class="marquee-track">
     <span class="marquee-item">Refonte Web</span>
     <span class="marquee-item">Design UX/UI</span>
@@ -3884,11 +3855,63 @@ const counterObs = new IntersectionObserver((entries) => {
 const statsSection = document.getElementById('stats');
 if (statsSection) counterObs.observe(statsSection);
 
+/* ── Webhook Discord ── */
+const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1492651406660997381/xuL7YF4f8Q0LSEzBEN2r-1LGJQui62Xj0tURUo9gBUaNrAyo51l8PK4mlC0yHsoXADCL';
+
+async function sendToDiscord(payload) {
+  try {
+    const res = await fetch(DISCORD_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 /* ── Contact form ── */
-document.getElementById('contact-form').addEventListener('submit', function(e) {
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
   e.preventDefault();
-  this.style.display = 'none';
-  document.getElementById('form-success').style.display = 'block';
+  const btn = this.querySelector('.btn-submit');
+  btn.textContent = 'Envoi en cours…';
+  btn.disabled = true;
+
+  const name    = document.getElementById('name').value.trim();
+  const company = document.getElementById('company').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const phone   = document.getElementById('phone').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  const now = new Date().toLocaleString('fr-CA', { timeZone: 'America/Toronto', dateStyle: 'full', timeStyle: 'short' });
+
+  const payload = {
+    username: 'AZ Digital — Formulaire Contact',
+    avatar_url: 'https://cdn-icons-png.flaticon.com/512/906/906343.png',
+    embeds: [{
+      title: '📬 Nouvelle demande de contact',
+      color: 0x04E3FF,
+      fields: [
+        { name: '👤 Nom',         value: name    || '—', inline: true  },
+        { name: '🏢 Entreprise',  value: company || '—', inline: true  },
+        { name: '📧 Courriel',    value: email   || '—', inline: false },
+        { name: '📞 Téléphone',   value: phone   || '—', inline: true  },
+        { name: '💬 Message',     value: message || '—', inline: false }
+      ],
+      footer: { text: '🕐 ' + now + ' · AZ Digital' },
+      thumbnail: { url: 'https://cdn-icons-png.flaticon.com/512/561/561127.png' }
+    }]
+  };
+
+  const ok = await sendToDiscord(payload);
+  if (ok) {
+    this.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  } else {
+    btn.textContent = 'Erreur — Réessayez';
+    btn.disabled = false;
+  }
 });
 
 /* ── Sparkles — toutes les sections (pause hors écran) ── */
@@ -4017,15 +4040,44 @@ toggleOui.addEventListener('click', () => {
 });
 
 /* ── Hero quote form ── */
-document.getElementById('hero-quote-form').addEventListener('submit', function(e) {
+document.getElementById('hero-quote-form').addEventListener('submit', async function(e) {
   e.preventDefault();
   const btn = this.querySelector('.hf-submit');
   btn.style.opacity = '.6';
   btn.disabled = true;
+
+  const name    = document.getElementById('hf-name').value.trim();
+  const email   = document.getElementById('hf-email').value.trim();
+  const phone   = document.getElementById('hf-phone').value.trim();
+  const service = document.getElementById('hf-service').value || '—';
+  const hasWebsite = document.querySelector('.hf-toggle[data-val].active')?.dataset.val === 'oui';
+  const website = hasWebsite ? (document.getElementById('hf-website').value.trim() || '—') : 'Non — Part de zéro';
+
+  const now = new Date().toLocaleString('fr-CA', { timeZone: 'America/Toronto', dateStyle: 'full', timeStyle: 'short' });
+
+  const payload = {
+    username: 'AZ Digital — Soumission Devis',
+    avatar_url: 'https://cdn-icons-png.flaticon.com/512/906/906343.png',
+    embeds: [{
+      title: '🚀 Nouvelle demande de soumission',
+      color: 0x7B2FFF,
+      fields: [
+        { name: '👤 Nom',          value: name    || '—', inline: true  },
+        { name: '📧 Courriel',     value: email   || '—', inline: true  },
+        { name: '📞 Téléphone',    value: phone   || '—', inline: true  },
+        { name: '🛠️ Service',      value: service,        inline: true  },
+        { name: '🌐 Site actuel',  value: website,        inline: false }
+      ],
+      footer: { text: '🕐 ' + now + ' · AZ Digital' },
+      thumbnail: { url: 'https://cdn-icons-png.flaticon.com/512/2721/2721297.png' }
+    }]
+  };
+
+  const ok = await sendToDiscord(payload);
   setTimeout(() => {
     document.getElementById('hf-form-inner').style.display = 'none';
     document.getElementById('hf-success').style.display = 'block';
-  }, 600);
+  }, ok ? 400 : 600);
 });
 
 /* 3D tilt on hero form card */
