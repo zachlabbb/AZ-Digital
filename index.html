@@ -6,6 +6,14 @@
   <title>AZ Digital — Refonte Web pour Entrepreneurs Québécois</title>
   <meta name="description" content="AZ Digital propulse les entrepreneurs locaux du Québec avec des sites web modernes, performants et convertissants." />
 
+  <!-- SEO -->
+  <link rel="canonical" href="https://azdigital.ca" />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="AZ Digital" />
+  <meta name="geo.region" content="CA-QC" />
+  <meta name="geo.placename" content="Montréal, Québec" />
+
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="AZ Digital — Refonte Web pour Entrepreneurs Québécois" />
@@ -33,6 +41,135 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://azdigital.ca/#business",
+        "name": "AZ Digital",
+        "description": "Agence web québécoise spécialisée en création de sites web, optimisation et e-commerce pour entrepreneurs locaux.",
+        "url": "https://azdigital.ca",
+        "telephone": "+14385233409",
+        "email": "info@azdigital.ca",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Montréal",
+          "addressRegion": "QC",
+          "addressCountry": "CA"
+        },
+        "areaServed": {
+          "@type": "State",
+          "name": "Québec"
+        },
+        "priceRange": "$$",
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        "sameAs": ["https://github.com/zachlabbb/AZ-Digital"],
+        "founder": [
+          { "@type": "Person", "name": "Alseny", "jobTitle": "Co-fondateur, Développeur & Expert SEO" },
+          { "@type": "Person", "name": "Zachary", "jobTitle": "Co-fondateur, Développeur & Stratège Web" }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Services Web",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Création de site web",
+              "description": "Site web moderne, rapide et pensé pour convertir, bâti de zéro à votre image.",
+              "price": "699",
+              "priceCurrency": "CAD"
+            },
+            {
+              "@type": "Offer",
+              "name": "Optimisation de site web",
+              "description": "Refonte visuelle moderne, vitesse optimisée, et une expérience qui convertit vraiment.",
+              "price": "499",
+              "priceCurrency": "CAD"
+            },
+            {
+              "@type": "Offer",
+              "name": "E-commerce",
+              "description": "Boutique Shopify ou WooCommerce optimisée pour convertir et générer des ventes.",
+              "price": "899",
+              "priceCurrency": "CAD"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://azdigital.ca/#website",
+        "url": "https://azdigital.ca",
+        "name": "AZ Digital",
+        "description": "Agence web québécoise — sites web modernes pour entrepreneurs locaux",
+        "inLanguage": "fr-CA",
+        "publisher": { "@id": "https://azdigital.ca/#business" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Combien de temps pour livrer mon site ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "En moyenne, un site vitrine est livré en 3 à 10 jours après notre première rencontre. Un projet e-commerce peut prendre 3 à 4 semaines selon la complexité."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Est-ce que je peux demander des modifications ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Des modifications peuvent être demandées au moment de la remise du projet, avant le lancement. Une fois le site livré et approuvé, toute modification supplémentaire est facturée."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "L'hébergement et le domaine sont-ils inclus ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "L'hébergement et le nom de domaine ne sont pas inclus dans le forfait de base, mais on s'occupe de tout configurer pour vous. On offre notre propre service d'hébergement à 30$/mois."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Je ne suis pas techno — est-ce que je vais pouvoir gérer mon site ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolument. On livre tous nos sites avec une interface simple à utiliser, et on vous forme en 30 minutes pour que vous puissiez modifier vos textes, photos et prix vous-même."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Pourquoi choisir AZ Digital plutôt qu'une grande agence ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Alseny et Zachary s'occupent de votre projet du début à la fin — communication directe, délais respectés, et un résultat qui reflète vraiment votre identité."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Est-ce que vous offrez du support après le lancement ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Aucun support n'est inclus après la livraison. Si vous avez besoin d'accompagnement, on peut établir ensemble un forfait sur mesure selon vos besoins."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -713,6 +850,41 @@
     }
     @media (max-width: 600px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── Trust bar ── */
+    .trust-bar {
+      background: #050505;
+      border-top: 1px solid rgba(4,227,255,.1);
+      border-bottom: 1px solid rgba(4,227,255,.1);
+      padding: .9rem 1.5rem;
+      overflow: hidden;
+    }
+    .trust-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .trust-bar-item {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .78rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.55);
+      white-space: nowrap;
+    }
+    .trust-bar-item svg { color: var(--accent); flex-shrink: 0; }
+    .trust-bar-dot {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.2);
+    }
+    @media (max-width: 600px) {
+      .trust-bar-dot { display: none; }
+      .trust-bar-inner { gap: .75rem; }
     }
 
     /* ── Services ── */
@@ -2567,6 +2739,36 @@
     </div>
   </div>
   </section>
+
+<!-- Bandeau de confiance -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-bar-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Livraison en 3 à 10 jours
+    </div>
+    <div class="trust-bar-dot"></div>
+    <div class="trust-bar-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Aucun engagement
+    </div>
+    <div class="trust-bar-dot"></div>
+    <div class="trust-bar-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      100% fait au Québec
+    </div>
+    <div class="trust-bar-dot"></div>
+    <div class="trust-bar-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Soumission gratuite
+    </div>
+    <div class="trust-bar-dot"></div>
+    <div class="trust-bar-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      À partir de 499$
+    </div>
+  </div>
+</div>
 
 <!-- Marquee -->
 <div class="marquee-wrapper">
