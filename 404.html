@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page introuvable — AZ Digital</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23000'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,sans-serif' font-weight='900' font-size='26' fill='%2304E3FF'>AZ</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #000;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size: 70px 80px;
+      pointer-events: none;
+    }
+    .container { position: relative; max-width: 500px; }
+    .code {
+      font-size: 8rem;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, #04E3FF, #0080ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+    }
+    h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; }
+    p { color: rgba(255,255,255,.5); line-height: 1.7; margin-bottom: 2.5rem; }
+    .btn {
+      display: inline-block;
+      background: #04E3FF;
+      color: #000;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      padding: .85rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .btn:hover { opacity: .85; }
+    .logo { display: block; font-size: 1.2rem; font-weight: 900; color: #04E3FF; margin-bottom: 3rem; text-decoration: none; }
+    .logo span { color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="logo">AZ<span>.</span>Digital</a>
+    <div class="code">404</div>
+    <h1>Page introuvable</h1>
+    <p>La page que vous cherchez n'existe pas ou a été déplacée. Pas de panique — on vous ramène à l'accueil.</p>
+    <a href="/" class="btn">Retour à l'accueil →</a>
+  </div>
+</body>
+</html>
