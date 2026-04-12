@@ -366,6 +366,36 @@
       }
       .nav-links.open { right: 0; }
       .nav-links a { font-size: 1.1rem; }
+
+      /* Soumission gratuite — override du style desktop dans le menu mobile */
+      .nav-links .nav-cta {
+        background: var(--accent);
+        color: var(--bg) !important;
+        padding: .75rem 1.5rem;
+        border-radius: 4px;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        font-size: 1rem !important;
+      }
+
+      /* Burger → croix quand ouvert */
+      .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .nav-burger.open span:nth-child(2) { opacity: 0; }
+      .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      /* Overlay sombre derrière le menu */
+      .nav-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.6);
+        z-index: 99;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .4s;
+      }
+      .nav-overlay.open { opacity: 1; pointer-events: all; }
     }
 
     /* ── Hero ── */
@@ -669,6 +699,13 @@
       opacity: 0;
       transform: translateY(100%);
       animation: slideUp 1s var(--ease) forwards;
+    }
+    .hero-accent-line i {
+      font-size: 1.25em;
+      line-height: .9;
+    }
+    @media (max-width: 768px) {
+      .hero-accent-line i { font-size: 1em; line-height: 1.1; }
     }
     .hero-title .line:nth-child(1) i { animation-delay: .6s; }
     .hero-title .line:nth-child(2) i { animation-delay: .75s; }
@@ -1608,11 +1645,89 @@
       .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
     }
     @media (max-width: 480px) {
-      section { padding: 5rem 1.5rem; }
-      nav { padding: 1rem 1.5rem; }
-      .hero-content { padding: 0 1.5rem; }
-      #stats { padding: 4rem 1.5rem; }
-      footer { padding: 3rem 1.5rem 2rem; }
+      section { padding: 4rem 1.25rem; }
+      nav { padding: 1rem 1.25rem; }
+      .hero-content { padding: 0 1.25rem; }
+      #stats { padding: 3.5rem 1.25rem; }
+      footer { padding: 3rem 1.25rem 2rem; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+
+    /* ── Mobile global improvements ── */
+    @media (max-width: 768px) {
+      /* Cursor: masquer sur touch */
+      #cursor, #cursor-ring { display: none !important; }
+      * { cursor: auto !important; }
+
+      /* Container padding */
+      .container { padding: 0 1.25rem; }
+
+      /* Hero */
+      .hero-title { font-size: clamp(1.9rem, 8vw, 2.8rem); }
+      .hero-sub { font-size: 1rem; margin-bottom: 2rem; }
+      #hero { padding: 7rem 0 4rem; }
+
+      /* Cacher la lune sur mobile — elle chevauche le texte */
+      #hero-moon { display: none; }
+
+      /* Réduire les blobs pour de meilleures performances */
+      .blob { opacity: .3; filter: blur(60px) !important; }
+
+      /* Hero form card */
+      .hero-form-card { padding: 1.5rem 1.25rem; }
+      .hf-service-row { grid-template-columns: 1fr 1fr; }
+
+      /* Badge "En ligne" — texte plus compact */
+      .hf-badge { font-size: .65rem; }
+
+      /* Témoignages — 1 colonne avant 900px pour éviter la compression */
+      .testimonials-bento { grid-template-columns: 1fr; }
+
+      /* About — cartes absolues remplacées par un layout normal */
+      .about-visual { height: auto; display: flex; flex-direction: column; gap: 1rem; }
+      .about-card { position: relative; width: 100% !important; transform: none !important; top: auto !important; left: auto !important; bottom: auto !important; right: auto !important; }
+      .about-card:hover { transform: none; }
+
+      /* Stats — 3 colonnes gardées mais plus petites, pas de layout cassé */
+      .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+      .stat-num { font-size: clamp(2rem, 8vw, 3.5rem); }
+
+      /* Process — onglets plus compacts */
+      .proc-tab { padding: .9rem 1rem; }
+      .proc-dot { width: 36px; height: 36px; font-size: .65rem; }
+      .proc-tab-info { display: none; }
+
+      /* Portfolio */
+      #portfolio .container { padding: 0 1.25rem; }
+      .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .portfolio-scroll { padding: 0 1.25rem 1.5rem; }
+
+      /* Pricing */
+      .pricing-grid { max-width: 100% !important; }
+
+      /* CTA band */
+      .cta-band { padding: 5rem 1.25rem; }
+      .cta-band h2 { font-size: clamp(2rem, 9vw, 3rem); }
+
+      /* Contact */
+      .contact-grid { gap: 2rem; }
+
+      /* WhatsApp */
+      .whatsapp-float { width: 52px; height: 52px; bottom: 1.5rem; right: 1.25rem; }
+      .whatsapp-tooltip { display: none; }
+
+      /* Section title */
+      .section-title { font-size: clamp(1.75rem, 7vw, 2.5rem); }
+    }
+
+    /* ── Très petits écrans (< 400px) ── */
+    @media (max-width: 400px) {
+      .hero-title { font-size: 1.75rem; }
+      .hero-form-card { padding: 1.25rem 1rem; }
+      .hf-badge { font-size: .6rem; padding: .3rem .7rem .3rem .5rem; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .hf-trust { gap: .6rem; }
+      .hf-service-row { grid-template-columns: 1fr; }
     }
 
     /* ── Team ── */
@@ -2611,6 +2726,7 @@
     <span></span><span></span><span></span>
   </button>
 </nav>
+<div class="nav-overlay" id="nav-overlay"></div>
 
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
@@ -2638,7 +2754,7 @@
       <h1 class="hero-title">
         <span class="line"><i>Votre site web,</i></span>
         <span class="line"><i>votre meilleur</i></span>
-        <span class="line"><i class="accent" style="font-size:1.25em;display:block;line-height:.9;">vendeur.</i></span>
+        <span class="line hero-accent-line"><i class="accent">vendeur.</i></span>
       </h1>
       <p class="hero-sub">
         AZ Digital propulse les entrepreneurs locaux du Québec avec des sites web modernes, performants et qui convertissent les visiteurs en clients.
@@ -3734,8 +3850,24 @@ window.addEventListener('scroll', () => {
 /* ── Mobile nav ── */
 const burger = document.getElementById('nav-burger');
 const navLinks = document.getElementById('nav-links');
-burger.addEventListener('click', () => navLinks.classList.toggle('open'));
-navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+const navOverlay = document.getElementById('nav-overlay');
+
+function openMenu() {
+  navLinks.classList.add('open');
+  burger.classList.add('open');
+  navOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+  navLinks.classList.remove('open');
+  burger.classList.remove('open');
+  navOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+burger.addEventListener('click', () => navLinks.classList.contains('open') ? closeMenu() : openMenu());
+navOverlay.addEventListener('click', closeMenu);
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
 
 /* ── Hero canvas — particle field ── */
@@ -3855,8 +3987,9 @@ const counterObs = new IntersectionObserver((entries) => {
 const statsSection = document.getElementById('stats');
 if (statsSection) counterObs.observe(statsSection);
 
-/* ── Webhook Discord ── */
+/* ── Webhooks ── */
 const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1492651406660997381/xuL7YF4f8Q0LSEzBEN2r-1LGJQui62Xj0tURUo9gBUaNrAyo51l8PK4mlC0yHsoXADCL';
+const ZAPIER_WEBHOOK  = 'https://hooks.zapier.com/hooks/catch/27194300/u7ekiib/';
 
 async function sendToDiscord(payload) {
   try {
@@ -3869,6 +4002,16 @@ async function sendToDiscord(payload) {
   } catch {
     return false;
   }
+}
+
+async function sendToZapier(data) {
+  try {
+    await fetch(ZAPIER_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch {}
 }
 
 /* ── Contact form ── */
@@ -3904,7 +4047,10 @@ document.getElementById('contact-form').addEventListener('submit', async functio
     }]
   };
 
-  const ok = await sendToDiscord(payload);
+  const [ok] = await Promise.all([
+    sendToDiscord(payload),
+    sendToZapier({ type: 'contact', name, company, email, phone, message })
+  ]);
   if (ok) {
     this.style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
@@ -4073,7 +4219,10 @@ document.getElementById('hero-quote-form').addEventListener('submit', async func
     }]
   };
 
-  const ok = await sendToDiscord(payload);
+  const [ok] = await Promise.all([
+    sendToDiscord(payload),
+    sendToZapier({ type: 'devis', name, email, phone, service, website })
+  ]);
   setTimeout(() => {
     document.getElementById('hf-form-inner').style.display = 'none';
     document.getElementById('hf-success').style.display = 'block';
