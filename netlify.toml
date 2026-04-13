@@ -1,0 +1,58 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# AZ Digital — Configuration Netlify
+# ─────────────────────────────────────────────────────────────────────────────
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# ─── Headers de sécurité (appliqués à toutes les pages) ──────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Empêche le clickjacking (inclusion dans un iframe)
+    X-Frame-Options = "DENY"
+
+    # Empêche le MIME-type sniffing
+    X-Content-Type-Options = "nosniff"
+
+    # Force HTTPS (HSTS) — 1 an
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+    # Politique de référent : n'envoie que l'origine, pas le chemin complet
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Désactive les fonctionnalités sensibles du navigateur
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+
+    # Content Security Policy
+    # Autorise uniquement les sources explicitement listées
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src  'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+      style-src   'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src    'self' https://fonts.gstatic.com;
+      img-src     'self' data: blob: https://cdn-icons-png.flaticon.com https://images.unsplash.com https://www.google-analytics.com https://azdigital.ca;
+      connect-src 'self' https://www.google-analytics.com https://analytics.google.com;
+      frame-src   'none';
+      object-src  'none';
+      base-uri    'self';
+      form-action 'self';
+    """
+
+# ─── Endpoint API sécurisé (formulaires) ─────────────────────────────────────
+[[redirects]]
+  from   = "/api/submit-form"
+  to     = "/.netlify/functions/submit-form"
+  status = 200
+
+# ─── Headers supplémentaires pour la fonction serverless ─────────────────────
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    # CORS : restreint à l'origine du site uniquement
+    Access-Control-Allow-Origin  = "https://azdigital.ca"
+    Access-Control-Allow-Methods = "POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
+    Access-Control-Max-Age       = "86400"
+    X-Content-Type-Options       = "nosniff"

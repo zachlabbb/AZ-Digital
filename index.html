@@ -29,7 +29,6 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23000'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,sans-serif' font-weight='900' font-size='26' fill='%2304E3FF'>AZ</text></svg>" />
 
   <!-- Google Analytics -->
-  <!-- Remplacer G-6X8C4MSWXL par votre vrai ID Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6X8C4MSWXL"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -3977,31 +3976,17 @@ const counterObs = new IntersectionObserver((entries) => {
 const statsSection = document.getElementById('stats');
 if (statsSection) counterObs.observe(statsSection);
 
-/* ── Webhooks ── */
-const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1492651406660997381/xuL7YF4f8Q0LSEzBEN2r-1LGJQui62Xj0tURUo9gBUaNrAyo51l8PK4mlC0yHsoXADCL';
-const ZAPIER_WEBHOOK  = 'https://hooks.zapier.com/hooks/catch/27194300/u7ekiib/';
-
-async function sendToDiscord(payload) {
-  try {
-    const res = await fetch(DISCORD_WEBHOOK, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    return res.ok;
-  } catch {
-    return false;
+/* ── API sécurisée (proxy serverless — webhooks jamais exposés côté client) ── */
+async function submitForm(payload) {
+  const res = await fetch('/api/submit-form', {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify(payload)
+  });
+  if (res.status === 429) {
+    throw Object.assign(new Error('rate_limit'), { status: 429 });
   }
-}
-
-async function sendToZapier(data) {
-  try {
-    await fetch(ZAPIER_WEBHOOK, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-  } catch {}
+  return res.ok;
 }
 
 /* ── Contact form ── */
@@ -4011,41 +3996,33 @@ document.getElementById('contact-form').addEventListener('submit', async functio
   btn.textContent = 'Envoi en cours…';
   btn.disabled = true;
 
-  const name    = document.getElementById('name').value.trim();
-  const company = document.getElementById('company').value.trim();
-  const email   = document.getElementById('email').value.trim();
-  const phone   = document.getElementById('phone').value.trim();
-  const message = document.getElementById('message').value.trim();
+  const name    = document.getElementById('name').value.trim().slice(0, 100);
+  const company = document.getElementById('company').value.trim().slice(0, 100);
+  const email   = document.getElementById('email').value.trim().slice(0, 150);
+  const phone   = document.getElementById('phone').value.trim().slice(0, 25);
+  const message = document.getElementById('message').value.trim().slice(0, 2000);
 
-  const now = new Date().toLocaleString('fr-CA', { timeZone: 'America/Toronto', dateStyle: 'full', timeStyle: 'short' });
+  if (!name || !email || !message) {
+    btn.textContent = 'Veuillez remplir tous les champs requis';
+    btn.disabled = false;
+    return;
+  }
 
-  const payload = {
-    username: 'AZ Digital — Formulaire Contact',
-    avatar_url: 'https://cdn-icons-png.flaticon.com/512/906/906343.png',
-    embeds: [{
-      title: '📬 Nouvelle demande de contact',
-      color: 0x04E3FF,
-      fields: [
-        { name: '👤 Nom',         value: name    || '—', inline: true  },
-        { name: '🏢 Entreprise',  value: company || '—', inline: true  },
-        { name: '📧 Courriel',    value: email   || '—', inline: false },
-        { name: '📞 Téléphone',   value: phone   || '—', inline: true  },
-        { name: '💬 Message',     value: message || '—', inline: false }
-      ],
-      footer: { text: '🕐 ' + now + ' · AZ Digital' },
-      thumbnail: { url: 'https://cdn-icons-png.flaticon.com/512/561/561127.png' }
-    }]
-  };
-
-  const [ok] = await Promise.all([
-    sendToDiscord(payload),
-    sendToZapier({ type: 'contact', name, company, email, phone, message })
-  ]);
-  if (ok) {
-    this.style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-  } else {
-    btn.textContent = 'Erreur — Réessayez';
+  try {
+    const ok = await submitForm({ type: 'contact', name, company, email, phone, message });
+    if (ok) {
+      this.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    } else {
+      btn.textContent = 'Erreur — Réessayez';
+      btn.disabled = false;
+    }
+  } catch (err) {
+    if (err.status === 429) {
+      btn.textContent = 'Trop de tentatives — attendez 15 min';
+    } else {
+      btn.textContent = 'Erreur — Réessayez';
+    }
     btn.disabled = false;
   }
 });
@@ -4182,41 +4159,33 @@ document.getElementById('hero-quote-form').addEventListener('submit', async func
   btn.style.opacity = '.6';
   btn.disabled = true;
 
-  const name    = document.getElementById('hf-name').value.trim();
-  const email   = document.getElementById('hf-email').value.trim();
-  const phone   = document.getElementById('hf-phone').value.trim();
-  const service = document.getElementById('hf-service').value || '—';
+  const name    = document.getElementById('hf-name').value.trim().slice(0, 100);
+  const email   = document.getElementById('hf-email').value.trim().slice(0, 150);
+  const phone   = document.getElementById('hf-phone').value.trim().slice(0, 25);
+  const service = (document.getElementById('hf-service').value || '—').slice(0, 100);
   const hasWebsite = document.querySelector('.hf-toggle[data-val].active')?.dataset.val === 'oui';
-  const website = hasWebsite ? (document.getElementById('hf-website').value.trim() || '—') : 'Non — Part de zéro';
+  const website = (hasWebsite ? (document.getElementById('hf-website').value.trim() || '—') : 'Non — Part de zéro').slice(0, 200);
 
-  const now = new Date().toLocaleString('fr-CA', { timeZone: 'America/Toronto', dateStyle: 'full', timeStyle: 'short' });
+  if (!name || !email) {
+    btn.style.opacity = '1';
+    btn.disabled = false;
+    return;
+  }
 
-  const payload = {
-    username: 'AZ Digital — Soumission Devis',
-    avatar_url: 'https://cdn-icons-png.flaticon.com/512/906/906343.png',
-    embeds: [{
-      title: '🚀 Nouvelle demande de soumission',
-      color: 0x7B2FFF,
-      fields: [
-        { name: '👤 Nom',          value: name    || '—', inline: true  },
-        { name: '📧 Courriel',     value: email   || '—', inline: true  },
-        { name: '📞 Téléphone',    value: phone   || '—', inline: true  },
-        { name: '🛠️ Service',      value: service,        inline: true  },
-        { name: '🌐 Site actuel',  value: website,        inline: false }
-      ],
-      footer: { text: '🕐 ' + now + ' · AZ Digital' },
-      thumbnail: { url: 'https://cdn-icons-png.flaticon.com/512/2721/2721297.png' }
-    }]
-  };
-
-  const [ok] = await Promise.all([
-    sendToDiscord(payload),
-    sendToZapier({ type: 'devis', name, email, phone, service, website })
-  ]);
-  setTimeout(() => {
-    document.getElementById('hf-form-inner').style.display = 'none';
-    document.getElementById('hf-success').style.display = 'block';
-  }, ok ? 400 : 600);
+  try {
+    const ok = await submitForm({ type: 'devis', name, email, phone, service, website });
+    setTimeout(() => {
+      document.getElementById('hf-form-inner').style.display = 'none';
+      document.getElementById('hf-success').style.display = 'block';
+    }, ok ? 400 : 600);
+  } catch (err) {
+    if (err.status === 429) {
+      btn.textContent = 'Trop de tentatives — attendez 15 min';
+    } else {
+      btn.style.opacity = '1';
+    }
+    btn.disabled = false;
+  }
 });
 
 /* 3D tilt on hero form card */

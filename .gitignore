@@ -1,0 +1,36 @@
+# ─── Secrets & variables d'environnement ─────────────────────────────────────
+.env
+.env.local
+.env.production
+.env.*.local
+
+# ─── Dépendances Node (si utilisées plus tard) ───────────────────────────────
+node_modules/
+
+# ─── Fichiers de build ────────────────────────────────────────────────────────
+.netlify/
+dist/
+build/
+out/
+
+# ─── Système d'exploitation ──────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Éditeurs ────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+
+# ─── Fichiers temporaires / brouillons ───────────────────────────────────────
+*.txt
+*.bak
+*~
+index\ -\ copie*
+intro
