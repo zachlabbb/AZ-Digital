@@ -4301,26 +4301,5 @@ if (hfCard) {
 })();
 </script>
 
-<!-- Cal.com Embed -->
-<script type="text/javascript">
-(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;}p(cal, ar);}; })(window, "https://app.cal.com/embed/embed.js", "init");
-Cal("init", {origin:"https://cal.com"});
-Cal("ui", {"theme":"dark","styles":{"branding":{"brandColor":"#04E3FF"}},"hideEventTypeDetails":false,"layout":"month_view"});
-
-/* Essayer d'ouvrir en modal Cal.com, sinon le lien s'ouvre normalement */
-document.getElementById('hf-cal-btn').addEventListener('click', function(e) {
-  try {
-    if (window.Cal) {
-      e.preventDefault();
-      Cal("modal", {
-        calLink: "zachary-labelle-xgc9cg/30min",
-        config: { layout: "month_view", theme: "dark" }
-      });
-    }
-  } catch(err) {
-    /* fallback: le lien target=_blank s'ouvre normalement */
-  }
-});
-</script>
 </body>
 </html>
