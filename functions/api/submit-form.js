@@ -208,7 +208,11 @@ export async function onRequestPost(context) {
 
   if (discordOk) return json({ success: true });
 
-  return json({ error: "Erreur lors de l'envoi. Veuillez réessayer." }, 502);
+  const discordError = discordRes.status === 'rejected'
+    ? String(discordRes.reason)
+    : await discordRes.value.text().catch(() => 'inconnu');
+
+  return json({ error: "Erreur Discord", detail: discordError }, 502);
 }
 
 /* Toutes les autres méthodes → 405 */
