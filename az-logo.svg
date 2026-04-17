@@ -22,6 +22,5 @@
   <rect x="4" y="4" width="504" height="504" rx="92" fill="none" stroke="url(#accent)" stroke-width="3" opacity="0.3"/>
   <!-- Texte AZ avec degrade et glow -->
   <text x="256" y="280" dominant-baseline="middle" text-anchor="middle" font-family="Inter,-apple-system,BlinkMacSystemFont,sans-serif" font-weight="900" font-size="200" fill="url(#accent)" filter="url(#glow)">AZ</text>
-  <!-- Point separateur -->
-  <circle cx="268" cy="340" r="12" fill="#04E3FF" opacity="0.9"/>
+
 </svg>
